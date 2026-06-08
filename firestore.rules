@@ -1,0 +1,61 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isActiveAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/members/$(request.auth.uid))
+        && get(/databases/$(database)/documents/members/$(request.auth.uid)).data.status == 'active'
+        && get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isActiveMember() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/members/$(request.auth.uid))
+        && get(/databases/$(database)/documents/members/$(request.auth.uid)).data.status == 'active';
+    }
+
+    match /members/{uid} {
+      allow read: if signedIn()
+        && (
+          request.auth.uid == uid
+          || isActiveAdmin()
+          || resource.data.email == request.auth.token.email
+        );
+      allow create, update, delete: if isActiveAdmin();
+    }
+
+    match /petitions/{petitionId} {
+      allow create: if true;
+      allow read, update, delete: if isActiveAdmin();
+    }
+
+    match /events/{eventId} {
+      allow read: if true;
+      allow create: if isActiveMember();
+      allow update, delete: if isActiveAdmin();
+    }
+
+    match /officials/{officialId} {
+      allow read: if true;
+      allow create: if isActiveMember();
+      allow update, delete: if isActiveAdmin();
+    }
+
+    match /advisory/{advisoryId} {
+      allow read: if true;
+      allow create: if isActiveMember();
+      allow update, delete: if isActiveAdmin();
+    }
+
+    match /sponsors/{sponsorId} {
+      allow read: if true;
+      allow create: if isActiveMember();
+      allow update, delete: if isActiveAdmin();
+    }
+  }
+}

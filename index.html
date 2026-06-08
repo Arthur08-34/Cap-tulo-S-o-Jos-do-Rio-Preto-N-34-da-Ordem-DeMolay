@@ -1,0 +1,2140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capítulo DeMolay São José do Rio Preto Nº34</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --deep: #111111;
+    --dark: #1a1a1a;
+    --card: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --nav-bg: rgba(10,10,10,0.95);
+    --red: #c0392b;
+    --red-light: #e74c3c;
+    --red-glow: rgba(192,57,43,0.15);
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --text: #f0ece4;
+    --muted: #8a8580;
+    --surface: rgba(255,255,255,0.03);
+    --hero-red: rgba(192,57,43,0.12);
+    --hero-gold: rgba(201,168,76,0.05);
+    --input-bg: #1a1a1a;
+    --shadow: 0 18px 40px rgba(0,0,0,0.32);
+  }
+  :root[data-theme="light"] {
+    --black: #f6f1ea;
+    --deep: #fffaf3;
+    --dark: #ffffff;
+    --card: #ffffff;
+    --border: rgba(71,48,36,0.15);
+    --nav-bg: rgba(255,250,243,0.94);
+    --red: #b83224;
+    --red-light: #d84a3c;
+    --red-glow: rgba(184,50,36,0.1);
+    --gold: #9a7430;
+    --gold-light: #c59b40;
+    --text: #241b16;
+    --muted: #6f6258;
+    --surface: rgba(184,50,36,0.06);
+    --hero-red: rgba(184,50,36,0.13);
+    --hero-gold: rgba(154,116,48,0.12);
+    --input-bg: #fffaf3;
+    --shadow: 0 18px 40px rgba(71,48,36,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--text); font-family: 'DM Sans', sans-serif; overflow-x: hidden; transition: background 0.25s, color 0.25s; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--deep); }
+  ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nav-logo {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-weight: 900; font-size: 14px;
+    color: var(--gold); border: 1px solid var(--gold);
+    flex-shrink: 0; overflow: visible; box-shadow: var(--shadow);
+    padding: 0; cursor: pointer; appearance: none;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .nav-logo:hover { transform: scale(1.04); border-color: var(--gold-light); }
+  .nav-logo:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .nav-logo img {
+    width: 100%; height: 100%; object-fit: contain; object-position: center;
+    border-radius: 50%; padding: 2px; background: #fff; display: block;
+  }
+  .nav-title-wrap { display: flex; flex-direction: column; }
+  .nav-cap { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+  .nav-name { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: 0.5px; }
+  .nav-links { display: flex; gap: 2px; }
+  .nav-links a {
+    padding: 8px 14px; color: var(--muted); text-decoration: none;
+    font-size: 13px; font-weight: 500; border-radius: 6px;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--surface); }
+  .nav-right { display: flex; gap: 8px; align-items: center; }
+  .btn-login {
+    padding: 8px 18px; background: transparent;
+    border: 1px solid var(--border); color: var(--muted);
+    border-radius: 6px; font-size: 13px; cursor: pointer;
+    transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-login:hover { border-color: var(--red); color: var(--text); }
+  .theme-toggle {
+    width: 38px; height: 38px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .theme-toggle:hover { border-color: var(--gold); color: var(--gold); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; padding-top: 68px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, var(--hero-red) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 80%, var(--hero-gold) 0%, transparent 60%);
+  }
+  .hero-lines {
+    position: absolute; inset: 0; opacity: 0.03;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.5) 60px),
+                      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,255,255,0.5) 60px);
+  }
+  .hero-content { text-align: center; position: relative; z-index: 1; max-width: 720px; padding: 2rem; }
+  .hero-eyebrow {
+    display: inline-block; font-family: 'Cinzel', serif;
+    font-size: 10px; letter-spacing: 4px; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 1.5rem;
+    padding: 6px 20px; border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px;
+  }
+  h1 {
+    font-family: 'Cinzel', serif; font-weight: 900;
+    font-size: 3.8rem; line-height: 1.1;
+    color: var(--text); margin-bottom: 1rem;
+    letter-spacing: 0;
+  }
+  h1 span { color: var(--red-light); }
+  .hero-quote {
+    font-family: 'Crimson Pro', serif; font-style: italic;
+    font-size: 1.15rem; color: var(--muted); max-width: 520px;
+    margin: 0 auto 2.5rem; line-height: 1.7;
+  }
+  .hero-quote em { color: var(--gold); font-style: normal; font-weight: 600; }
+  .hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 14px 32px; background: var(--red); color: #fff;
+    border: none; border-radius: 4px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.25s; font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.5px; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+  .btn-ghost {
+    padding: 13px 32px; background: transparent; color: var(--text);
+    border: 1px solid var(--border); border-radius: 4px; font-size: 14px;
+    font-weight: 500; cursor: pointer; transition: all 0.25s;
+    font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); background: var(--surface); }
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-header { margin-bottom: 3rem; }
+  .section-tag {
+    font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-tag::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 80px; }
+  h2 { font-family: 'Cinzel', serif; font-size: 2.25rem; font-weight: 700; color: var(--text); }
+  h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); }
+  .site-page,
+  #hero.site-page { display: none; }
+  .site-page.active { display: block; }
+  #hero.site-page.active { display: flex; }
+  .divider { display: none; width: 100%; height: 1px; background: var(--border); margin: 0; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .about-text p { color: var(--muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem; text-align: center;
+  }
+  .stat-num { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 900; color: var(--red-light); }
+  .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  /* CALENDAR */
+  #calendar-section { background: transparent; }
+  .calendar-wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .calendar-grid { display: grid; gap: 1rem; }
+  .calendar-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap; margin: -1rem 0 1.5rem;
+  }
+  .calendar-tab {
+    padding: 9px 14px; background: var(--card); color: var(--muted);
+    border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .calendar-tab:hover, .calendar-tab.active { color: var(--text); border-color: var(--red); background: var(--surface); }
+  .event-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem 1.5rem;
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 1.25rem; align-items: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .event-card:hover { border-color: rgba(192,57,43,0.4); transform: translateY(-2px); }
+  .event-date-block {
+    text-align: center; min-width: 52px;
+    background: var(--red-glow); border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 6px; padding: 8px 12px;
+  }
+  .event-day { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 900; color: var(--red-light); line-height: 1; }
+  .event-month { font-size: 10px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; margin-top: 2px; }
+  .event-title { font-family: 'Cinzel', serif; font-size: 1rem; margin-bottom: 4px; }
+  .event-desc { font-size: 13px; color: var(--muted); }
+  .event-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .tag {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 10px; letter-spacing: 0.5px; font-weight: 600;
+    text-transform: uppercase;
+  }
+  .tag-ritual { background: rgba(192,57,43,0.2); color: #e87070; border: 1px solid rgba(192,57,43,0.3); }
+  .tag-social { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .tag-filantropia { background: rgba(46,213,115,0.1); color: #4ddb8a; border: 1px solid rgba(46,213,115,0.25); }
+  .tag-formacao { background: rgba(100,149,237,0.15); color: #7ab3f5; border: 1px solid rgba(100,149,237,0.3); }
+  .event-location { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+
+  .category-count { color: var(--gold); font-size: 11px; font-weight: 700; margin-top: 8px; text-transform: uppercase; }
+  .empty-state {
+    border: 1px dashed var(--border); border-radius: 8px; padding: 2rem;
+    text-align: center; color: var(--muted); background: var(--surface);
+  }
+  .officials-grid .empty-state,
+  .advisory-grid .empty-state,
+  .sponsors-grid .empty-state { grid-column: 1 / -1; }
+  .firebase-status {
+    display: none; border: 1px solid rgba(201,168,76,0.35); border-radius: 8px;
+    padding: 0.85rem 1rem; margin-bottom: 1rem; color: var(--gold);
+    background: rgba(201,168,76,0.1); font-size: 13px; line-height: 1.5;
+  }
+  .firebase-status.open { display: block; }
+
+  /* OFFICIALS */
+  .officials-section { padding-bottom: 5rem; }
+  .officials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; }
+  .official-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem; text-align: center;
+    transition: all 0.25s;
+  }
+  .official-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-3px); }
+  .official-avatar {
+    width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 1rem;
+    background: linear-gradient(135deg, var(--red), #7a1a10);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700;
+    color: var(--gold); border: 2px solid rgba(201,168,76,0.3);
+  }
+  .official-role { font-size: 10px; letter-spacing: 1.5px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+  .official-name { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; }
+
+  /* CONSELHO */
+  .advisory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+  .advisory-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .advisory-card:hover { border-color: rgba(201,168,76,0.25); }
+  .advisory-avatar {
+    width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700;
+    color: var(--gold); border: 1px solid var(--border);
+  }
+  .advisory-info h4 { font-family: 'Cinzel', serif; font-size: 0.9rem; margin-bottom: 2px; }
+  .advisory-info p { font-size: 12px; color: var(--muted); }
+
+  /* PATROCINADORES */
+  .sponsors-section { text-align: center; }
+  .sponsors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .sponsor-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem 1rem;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    transition: all 0.25s;
+  }
+  .sponsor-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); }
+  .sponsor-logo {
+    width: 60px; height: 60px; border-radius: 8px;
+    background: var(--surface); display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .sponsor-name { font-size: 13px; font-weight: 500; text-align: center; }
+  .sponsor-type { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
+
+  /* FORMULÁRIO */
+  .form-section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 3rem; max-width: 700px; margin: 0 auto;
+  }
+  .form-intro { margin-bottom: 2rem; }
+  .form-intro p { color: var(--muted); line-height: 1.7; font-size: 0.95rem; margin-top: 0.5rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 12px; letter-spacing: 0.5px; color: var(--muted); font-weight: 500; }
+  input, select, textarea {
+    background: var(--input-bg); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px 14px; color: var(--text);
+    font-size: 14px; font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s; outline: none;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--red); }
+  select option { background: var(--dark); color: var(--text); }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-download {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.25rem;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .form-download-info { font-size: 13px; color: var(--muted); }
+  .form-download-info strong { color: var(--text); display: block; margin-bottom: 2px; }
+  .btn-download {
+    padding: 8px 16px; background: transparent;
+    border: 1px solid var(--gold); color: var(--gold);
+    border-radius: 4px; font-size: 12px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .btn-download:hover { background: rgba(201,168,76,0.1); }
+  .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
+  .form-actions .btn-primary { flex: 1; text-align: center; border: none; }
+  .success-msg {
+    display: none; background: rgba(46,213,115,0.1); border: 1px solid rgba(46,213,115,0.3);
+    border-radius: 8px; padding: 1rem 1.25rem; color: #4ddb8a; font-size: 14px; margin-top: 1rem;
+  }
+
+  /* LOGIN MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--dark); border: 1px solid var(--border);
+    border-radius: 8px; padding: 2.5rem; width: 100%; max-width: 420px;
+    margin: 1rem;
+  }
+  .logo-preview-overlay {
+    display: none; position: fixed; inset: 0; z-index: 230;
+    background: rgba(0,0,0,0.88); backdrop-filter: blur(5px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .logo-preview-overlay.open { display: flex; }
+  .logo-preview-inner {
+    position: relative; width: min(86vw, 760px); max-height: 86vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-preview-inner img {
+    width: auto; height: auto; max-width: 100%; max-height: 82vh; object-fit: contain;
+    border-radius: 50%; background: #fff; padding: clamp(8px, 1.4vw, 16px);
+    box-shadow: 0 28px 80px rgba(0,0,0,0.55);
+  }
+  .logo-preview-close {
+    position: absolute; top: -14px; right: -14px;
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--dark);
+    color: var(--text); cursor: pointer; font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-preview-close:hover { border-color: var(--gold); color: var(--gold); }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+  .modal-title { font-family: 'Cinzel', serif; font-size: 1.2rem; }
+  .modal-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.4rem; padding: 4px; }
+  .modal-close:hover { color: var(--text); }
+  .modal-form { display: flex; flex-direction: column; gap: 1rem; }
+  .modal-form input { background: var(--input-bg); }
+  .modal-footer { margin-top: 0.5rem; font-size: 12px; color: var(--muted); text-align: center; }
+
+  /* ÁREA DO MEMBRO */
+  #member-panel {
+    display: none; position: fixed; inset: 0; z-index: 145;
+    background: var(--deep); overflow-y: auto;
+  }
+  #member-panel.open { display: block; }
+  .member-content { max-width: 980px; margin: 0 auto; padding: 2rem; }
+  .member-hero {
+    display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1rem;
+  }
+  .member-kicker { color: var(--gold); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .member-name { font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--text); margin-bottom: 8px; }
+  .member-meta { color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .member-badge {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 96px;
+    border-radius: 8px; border: 1px solid rgba(46,213,115,0.3);
+    background: rgba(46,213,115,0.1); color: #3fbf78; padding: 10px 14px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+  }
+  .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .member-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; min-height: 120px;
+  }
+  .member-card h3 { margin-bottom: 0.75rem; color: var(--gold); }
+  .member-card p, .member-card li { color: var(--muted); font-size: 13px; line-height: 1.7; }
+  .member-card ul { list-style: none; display: grid; gap: 8px; }
+  .member-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .member-action-btn {
+    padding: 10px 12px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text); cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .member-action-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ADMIN PANEL */
+  #admin-panel {
+    display: none; position: fixed; inset: 0; z-index: 150;
+    background: var(--deep); overflow-y: auto;
+  }
+  #admin-panel.open { display: block; }
+  .admin-nav {
+    background: var(--dark); border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .admin-nav-title { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold); }
+  .admin-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+  .admin-tab {
+    padding: 6px 14px; background: transparent; border: 1px solid var(--border);
+    color: var(--muted); border-radius: 4px; font-size: 12px; cursor: pointer;
+    transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  }
+  .admin-tab.active, .admin-tab:hover { background: var(--red); border-color: var(--red); color: #fff; }
+  .admin-content { padding: 2rem; max-width: 900px; margin: 0 auto; }
+  .admin-section { display: none; }
+  .admin-section.active { display: block; }
+  .admin-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;
+  }
+  .admin-card h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--gold); }
+  .admin-row { display: flex; gap: 1rem; align-items: center; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+  .admin-row:last-child { border-bottom: none; }
+  .admin-actions { display: flex; gap: 6px; }
+  .btn-sm {
+    padding: 5px 12px; font-size: 11px; border-radius: 4px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  }
+  .btn-edit { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+  .btn-edit:hover { background: rgba(201,168,76,0.1); }
+  .btn-del { background: transparent; border: 1px solid rgba(192,57,43,0.5); color: #e87070; }
+  .btn-del:hover { background: rgba(192,57,43,0.1); }
+  .btn-add {
+    padding: 8px 16px; background: var(--red); border: none; color: #fff;
+    border-radius: 4px; font-size: 13px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: background 0.2s;
+    margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-add:hover { background: var(--red-light); }
+  .submissions-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .submissions-table th { color: var(--muted); font-weight: 500; text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 11px; letter-spacing: 0.5px; }
+  .submissions-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+  .submissions-table tr:hover td { background: var(--surface); }
+  .status-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 600; }
+  .status-pending { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .status-approved { background: rgba(46,213,115,0.1); color: #4ddb8a; }
+  .status-review { background: rgba(100,149,237,0.15); color: #7ab3f5; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 2rem; margin-top: 4rem;
+  }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; }
+  .footer-brand p { color: var(--muted); font-size: 13px; line-height: 1.7; margin-top: 1rem; max-width: 300px; }
+  .footer-links h4, .footer-contact h4 { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 1px; color: var(--gold); margin-bottom: 1rem; text-transform: uppercase; }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; cursor: pointer; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-contact p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .footer-bottom { max-width: 1100px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--dark); border-bottom: 1px solid var(--border); padding: 1rem; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; }
+    .member-hero, .member-grid { grid-template-columns: 1fr; }
+    .event-card { grid-template-columns: 1fr; }
+    .event-card > div:last-child { text-align: left; }
+    .form-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .officials-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .admin-tabs { gap: 3px; }
+    .admin-tab { font-size: 11px; padding: 5px 10px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+    nav { padding: 0 1rem; }
+    .nav-name { font-size: 12px; }
+    .btn-login { padding: 8px 12px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.7s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.35s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-brand">
+    <button type="button" class="nav-logo" id="nav-logo-wrap" onclick="openLogoPreview()" aria-label="Ampliar logo do capítulo">
+      <img src="assets/logo-demolay-sjrp-nav.png" alt="Brasão do Capítulo DeMolay São José do Rio Preto Nº34">
+    </button>
+    <div class="nav-title-wrap">
+      <span class="nav-cap">Capítulo</span>
+      <span class="nav-name">DeMolay SJRP Nº34</span>
+    </div>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a href="#inicio" data-page-target="hero" onclick="openSiteTab('hero', event)">Início</a>
+    <a href="#sobre" data-page-target="about" onclick="openSiteTab('about', event)">Sobre</a>
+    <a href="#calendario" data-page-target="calendar-section" onclick="openSiteTab('calendar-section', event)">Calendário</a>
+    <a href="#oficiais" data-page-target="officials-section" onclick="openSiteTab('officials-section', event)">Oficiais</a>
+    <a href="#conselho" data-page-target="advisory-section" onclick="openSiteTab('advisory-section', event)">Conselho</a>
+    <a href="#patrocinadores" data-page-target="sponsors-section" onclick="openSiteTab('sponsors-section', event)">Patrocinadores</a>
+    <a href="#junte-se" data-page-target="join-section" onclick="openSiteTab('join-section', event)">Junte-se</a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema">☾</button>
+    <button class="btn-login" id="member-login-button" onclick="openLogin()">Área do DeMolay</button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- LOGO PREVIEW -->
+<div class="logo-preview-overlay" id="logo-preview" onclick="closeLogoPreview(event)" aria-hidden="true">
+  <div class="logo-preview-inner">
+    <button type="button" class="logo-preview-close" onclick="closeLogoPreview()" aria-label="Fechar">&times;</button>
+    <img id="logo-preview-img" src="assets/logo-demolay-sjrp-nav.png" alt="Brasão do Capítulo DeMolay São José do Rio Preto Nº34 ampliado">
+  </div>
+</div>
+
+<!-- HERO -->
+<div id="hero" class="site-page active">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Ordem DeMolay • Desde 1982</div>
+    <h1>Capítulo DeMolay<br><span>São José do Rio Preto</span> Nº34</h1>
+    <p class="hero-quote">
+      "Para ser útil à sociedade, não é necessário ser um DeMolay, mas para ser um DeMolay,
+      <em>é necessário ser útil à sociedade.</em>"
+    </p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#junte-se" data-page-target="join-section" onclick="openSiteTab('join-section', event)">Junte-se a nós</a>
+      <a class="btn-ghost" href="#sobre" data-page-target="about" onclick="openSiteTab('about', event)">Saiba mais</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SOBRE -->
+<section id="about" class="site-page">
+  <div class="section-header">
+    <div class="section-tag">Sobre nós</div>
+    <h2>Uma Irmandade de<br>Valores e Propósito</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>A Ordem DeMolay é uma organização internacional para jovens entre 12 e 21 anos, fundada em 1919 em Kansas City, Missouri. O Capítulo São José do Rio Preto Nº34 foi fundado em 1982 e é um dos mais ativos do estado de São Paulo.</p>
+      <p>Trabalhamos o desenvolvimento de líderes responsáveis, cidadãos comprometidos e homens de bem — através de sete virtudes fundamentais: Amor Filial, Reverência, Cortesia, Companheirismo, Pureza, Patriotismo e Fidelidade.</p>
+      <p>Nossos membros participam de cerimônias rituais, projetos sociais, esportes, cultura e atividades de liderança que formam o caráter para a vida adulta.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">42</div>
+        <div class="stat-label">Anos de história</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">34</div>
+        <div class="stat-label">Membros ativos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Virtudes DeMolay</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">150+</div>
+        <div class="stat-label">Ex-membros formados</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CALENDÁRIO -->
+<section id="calendar-section" class="site-page" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+  <div class="section-header">
+    <div class="section-tag">Agenda</div>
+    <h2>Próximas Atividades e Eventos</h2>
+  </div>
+  <div class="calendar-tabs" id="calendar-tabs">
+    <!-- populated by JS -->
+  </div>
+  <div class="calendar-grid" id="events-list">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OFICIAIS -->
+<section id="officials-section" class="officials-section site-page">
+  <div class="section-header">
+    <div class="section-tag">Nominata</div>
+    <h2>Oficiais do Capítulo</h2>
+  </div>
+  <div class="officials-grid" id="officials-grid">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONSELHO CONSULTIVO -->
+<section id="advisory-section" class="site-page">
+  <div class="section-header">
+    <div class="section-tag">Liderança</div>
+    <h2>Conselho Consultivo</h2>
+  </div>
+  <div class="advisory-grid" id="advisory-grid">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PATROCINADORES -->
+<section id="sponsors-section" class="sponsors-section site-page" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+  <div class="section-header" style="text-align:center;">
+    <div class="section-tag" style="justify-content:center;">Apoio</div>
+    <h2>Nossos Patrocinadores</h2>
+    <p style="color:var(--muted);margin-top:0.75rem;font-size:14px;">Empresas e pessoas que acreditam no nosso trabalho</p>
+  </div>
+  <div class="sponsors-grid" id="sponsors-grid">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- JUNTE-SE -->
+<section id="join-section" class="site-page" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+  <div class="section-header" style="text-align:center;margin-bottom:2rem;">
+    <div class="section-tag" style="justify-content:center;">Ingresso</div>
+    <h2>Torne-se um DeMolay</h2>
+    <p style="color:var(--muted);margin-top:0.75rem;font-size:14px;max-width:500px;margin-left:auto;margin-right:auto;">
+      Preencha o formulário abaixo para iniciar sua jornada. Nossa equipe entrará em contato em até 5 dias úteis.
+    </p>
+  </div>
+  <div class="form-section">
+    <div class="form-download">
+      <div class="form-download-info">
+        <strong>📄 Formulário de Petição</strong>
+        Baixe o formulário oficial, preencha e envie junto com sua solicitação
+      </div>
+      <button class="btn-download" onclick="downloadForm()">⬇ Baixar PDF</button>
+    </div>
+    <div class="form-grid" id="join-form">
+      <div class="form-group">
+        <label>Nome completo *</label>
+        <input type="text" id="f-name" placeholder="Seu nome completo">
+      </div>
+      <div class="form-group">
+        <label>Data de nascimento *</label>
+        <input type="date" id="f-birth">
+      </div>
+      <div class="form-group">
+        <label>E-mail *</label>
+        <input type="email" id="f-email" placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label>Telefone / WhatsApp *</label>
+        <input type="tel" id="f-phone" placeholder="(17) 99999-0000">
+      </div>
+      <div class="form-group">
+        <label>Nome do responsável (se menor)</label>
+        <input type="text" id="f-guardian" placeholder="Nome do pai/mãe/responsável">
+      </div>
+      <div class="form-group">
+        <label>Como nos conheceu?</label>
+        <select id="f-source">
+          <option value="">Selecione...</option>
+          <option>Amigo DeMolay</option>
+          <option>Redes sociais</option>
+          <option>Escola</option>
+          <option>Loja Maçônica</option>
+          <option>Pesquisa na internet</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Mensagem (opcional)</label>
+        <textarea id="f-msg" placeholder="Conte-nos um pouco sobre você e por que quer ser DeMolay..."></textarea>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn-primary" onclick="submitForm()">Enviar Petição →</button>
+    </div>
+    <div class="success-msg" id="form-success">
+      ✅ Petição enviada com sucesso! Nossa equipe entrará em contato em breve. Bem-vindo à família DeMolay!
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--text);">Capítulo DeMolay<br>São José do Rio Preto Nº34</div>
+      <p>Formando líderes, construindo caráter e servindo à sociedade desde 1982. Uma irmandade para a vida.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#sobre" data-page-target="about" onclick="openSiteTab('about', event)">Sobre</a></li>
+        <li><a href="#calendario" data-page-target="calendar-section" onclick="openSiteTab('calendar-section', event)">Calendário</a></li>
+        <li><a href="#oficiais" data-page-target="officials-section" onclick="openSiteTab('officials-section', event)">Oficiais</a></li>
+        <li><a href="#conselho" data-page-target="advisory-section" onclick="openSiteTab('advisory-section', event)">Conselho</a></li>
+        <li><a href="#patrocinadores" data-page-target="sponsors-section" onclick="openSiteTab('sponsors-section', event)">Patrocinadores</a></li>
+        <li><a href="#junte-se" data-page-target="join-section" onclick="openSiteTab('join-section', event)">Junte-se</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Contato</h4>
+      <p>
+        📍 São José do Rio Preto, SP<br>
+        📧 capitulo34@demolay.org.br<br>
+        📱 (17) 9 9999-0000<br><br>
+        🕐 Reuniões: Toda sexta-feira<br>
+        às 19h30 na sede
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Capítulo DeMolay SJRP Nº34 · Todos os direitos reservados</span>
+    <span>Ordem DeMolay Brasil</span>
+  </div>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Área do DeMolay</h3>
+      <button class="modal-close" onclick="closeLogin()">✕</button>
+    </div>
+    <div class="modal-form">
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="login-user" placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="login-pass" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" style="border:none;width:100%;text-align:center;" onclick="doLogin()">Entrar</button>
+      <div style="color:#e87070;font-size:12px;text-align:center;display:none;" id="login-error">Credenciais inválidas ou membro inativo.</div>
+      <div class="firebase-status" id="firebase-status"></div>
+    </div>
+    <div class="modal-footer" style="margin-top:1rem;">Área exclusiva para DeMolays ativos cadastrados no Firebase</div>
+  </div>
+</div>
+
+<!-- MEMBER PANEL -->
+<div id="member-panel">
+  <div class="admin-nav">
+    <span class="admin-nav-title">Área do DeMolay Ativo</span>
+    <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-login" id="member-admin-button" onclick="openAdmin()" style="display:none;">Painel administrativo</button>
+      <button class="btn-login" onclick="logoutMember()">Sair</button>
+    </div>
+  </div>
+  <div class="member-content">
+    <div class="member-hero">
+      <div>
+        <div class="member-kicker">Sessão autenticada</div>
+        <div class="member-name" id="member-panel-name">DeMolay</div>
+        <div class="member-meta" id="member-panel-meta">Carregando dados do cadastro...</div>
+      </div>
+      <div class="member-badge">Ativo</div>
+    </div>
+    <div class="member-grid">
+      <div class="member-card">
+        <h3>Próximas atividades</h3>
+        <ul id="member-next-events"></ul>
+      </div>
+      <div class="member-card">
+        <h3>Categorias em destaque</h3>
+        <div id="member-category-summary" style="display:grid;gap:0.5rem;"></div>
+      </div>
+      <div class="member-card">
+        <h3>Cadastrar no site</h3>
+        <div class="member-actions">
+          <button class="member-action-btn" onclick="addEvent()">+ Atividade</button>
+          <button class="member-action-btn" onclick="addOfficial()">+ Oficial</button>
+          <button class="member-action-btn" onclick="addAdvisory()">+ Conselheiro</button>
+          <button class="member-action-btn" onclick="addSponsor()">+ Patrocinador</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div class="admin-nav">
+    <span class="admin-nav-title">⚙ Painel Administrativo — DeMolay Nº34</span>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="adminTab('submissions', this)">Petições</button>
+        <button class="admin-tab" onclick="adminTab('calendar', this)">Calendário</button>
+        <button class="admin-tab" onclick="adminTab('officials', this)">Oficiais</button>
+        <button class="admin-tab" onclick="adminTab('advisory', this)">Conselho</button>
+        <button class="admin-tab" onclick="adminTab('sponsors', this)">Patrocinadores</button>
+        <button class="admin-tab" onclick="adminTab('members', this)">Membros</button>
+        <button class="admin-tab" onclick="adminTab('fotos', this)">Fotos</button>
+        <button class="admin-tab" onclick="adminTab('config', this)">Configurações</button>
+      </div>
+      <button class="btn-login" onclick="closeAdmin()">Sair ✕</button>
+    </div>
+  </div>
+  <div class="admin-content">
+
+    <!-- PETIÇÕES -->
+    <div class="admin-section active" id="tab-submissions">
+      <div class="admin-card">
+        <h3>📋 Petições Recebidas</h3>
+        <div style="overflow-x:auto;">
+          <table class="submissions-table" id="submissions-table">
+            <thead><tr><th>Nome</th><th>Idade</th><th>E-mail</th><th>Telefone</th><th>Como conheceu</th><th>Status</th><th>Ação</th></tr></thead>
+            <tbody id="submissions-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALENDÁRIO -->
+    <div class="admin-section" id="tab-calendar">
+      <button class="btn-add" onclick="addEvent()">+ Novo Evento</button>
+      <div class="admin-card">
+        <h3>📅 Eventos Cadastrados</h3>
+        <div id="admin-events-list"></div>
+      </div>
+    </div>
+
+    <!-- OFICIAIS -->
+    <div class="admin-section" id="tab-officials">
+      <button class="btn-add" onclick="addOfficial()">+ Novo Oficial</button>
+      <div class="admin-card">
+        <h3>👑 Nominata Atual</h3>
+        <div id="admin-officials-list"></div>
+      </div>
+    </div>
+
+    <!-- CONSELHO -->
+    <div class="admin-section" id="tab-advisory">
+      <button class="btn-add" onclick="addAdvisory()">+ Novo Conselheiro</button>
+      <div class="admin-card">
+        <h3>🏛 Conselho Consultivo</h3>
+        <div id="admin-advisory-list"></div>
+      </div>
+    </div>
+
+    <!-- PATROCINADORES -->
+    <div class="admin-section" id="tab-sponsors">
+      <button class="btn-add" onclick="addSponsor()">+ Novo Patrocinador</button>
+      <div class="admin-card">
+        <h3>🤝 Patrocinadores Cadastrados</h3>
+        <div id="admin-sponsors-list"></div>
+      </div>
+    </div>
+
+    <!-- MEMBROS -->
+    <div class="admin-section" id="tab-members">
+      <div class="admin-card">
+        <h3>🔐 Cadastrar DeMolay ativo</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>ID DeMolay</label>
+            <input type="text" id="m-member-id" placeholder="DM34-002">
+          </div>
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" id="m-name" placeholder="Nome do membro">
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="m-email" placeholder="membro@demolay.org.br">
+          </div>
+          <div class="form-group">
+            <label>Senha provisória</label>
+            <input type="password" id="m-password" placeholder="mínimo 6 caracteres">
+          </div>
+          <div class="form-group">
+            <label>Perfil</label>
+            <select id="m-role">
+              <option value="member">Membro</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="m-status">
+              <option value="active">Ativo</option>
+              <option value="inactive">Inativo</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-add" style="margin-top:1rem;" onclick="createMember()">Salvar membro</button>
+        <div class="success-msg" id="member-create-success">Membro salvo no Firebase.</div>
+      </div>
+      <div class="admin-card">
+        <h3>👥 DeMolays cadastrados</h3>
+        <div id="admin-members-list" class="empty-state">Entre como administrador para carregar os membros ativos.</div>
+      </div>
+    </div>
+
+    <!-- FOTOS -->
+    <div class="admin-section" id="tab-fotos">
+      <div class="admin-card">
+        <h3>🖼 Galeria de Fotos</h3>
+        <div style="border:2px dashed var(--border);border-radius:8px;padding:3rem;text-align:center;color:var(--muted);margin-bottom:1rem;">
+          <div style="font-size:2rem;margin-bottom:0.5rem;">📸</div>
+          <p style="font-size:14px;">Arraste fotos aqui ou clique para selecionar</p>
+          <input type="file" multiple accept="image/*" style="display:none" id="photo-upload" onchange="handlePhotos(this)">
+          <button class="btn-add" style="margin-top:1rem;margin-bottom:0;" onclick="document.getElementById('photo-upload').click()">Selecionar Fotos</button>
+        </div>
+        <div id="photo-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;"></div>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div class="admin-section" id="tab-config">
+      <div class="admin-card">
+        <h3>⚙ Configurações do Site</h3>
+        <div style="display:grid;gap:1rem;">
+          <div class="form-group">
+            <label>Nome do capítulo</label>
+            <input type="text" value="Capítulo DeMolay São José do Rio Preto Nº34">
+          </div>
+          <div class="form-group">
+            <label>E-mail de contato</label>
+            <input type="email" value="capitulo34@demolay.org.br">
+          </div>
+          <div class="form-group">
+            <label>Telefone</label>
+            <input type="tel" value="(17) 9 9999-0000">
+          </div>
+          <div class="form-group">
+            <label>Foto de perfil / brasão (URL)</label>
+            <input type="url" id="logo-url" placeholder="https://..." oninput="updateLogo(this.value)">
+          </div>
+          <div class="form-group">
+            <label>Endereço da sede</label>
+            <input type="text" value="São José do Rio Preto, SP">
+          </div>
+          <button class="btn-primary" style="border:none;max-width:200px;" onclick="alert('Configurações salvas!')">Salvar alterações</button>
+        </div>
+      </div>
+      <div class="admin-card">
+        <h3>🔐 Alterar senha de acesso</h3>
+        <div style="display:grid;gap:1rem;max-width:400px;">
+          <div class="form-group"><label>Senha atual</label><input type="password" placeholder="••••••••"></div>
+          <div class="form-group"><label>Nova senha</label><input type="password" placeholder="••••••••"></div>
+          <div class="form-group"><label>Confirmar nova senha</label><input type="password" placeholder="••••••••"></div>
+          <button class="btn-primary" style="border:none;max-width:200px;" onclick="alert('Senha atualizada!')">Alterar senha</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="firebase-config.js"></script>
+<script>
+// ===== DATA =====
+let appData = {
+  events: [],
+  categories: [
+    { id:'ritual', label:'Ritual', desc:'Cerimônias, reuniões ritualísticas e trabalhos internos do Capítulo.', className:'tag-ritual' },
+    { id:'social', label:'Social', desc:'Confraternizações, integração entre membros e atividades abertas à família.', className:'tag-social' },
+    { id:'filantropia', label:'Filantropia', desc:'Campanhas, arrecadações e ações de serviço à comunidade.', className:'tag-filantropia' },
+    { id:'formacao', label:'Formação', desc:'Palestras, estudos, treinamentos e desenvolvimento de liderança.', className:'tag-formacao' },
+  ],
+  officials: [],
+  advisory: [],
+  sponsors: [],
+  submissions: []
+};
+
+let selectedEventCategory = 'todos';
+let currentMember = null;
+let activeMembers = [];
+let firebaseServices = null;
+let firebaseInitPromise = null;
+let firebaseConfigured = false;
+let demoMode = false;
+
+const demoMembers = [
+  { uid:'demo-admin', memberId:'DM34-ADMIN', name:'Administrador DeMolay', email:'admin@demolay.org.br', role:'admin', status:'active', demoPassword:'demolay34' },
+  { uid:'demo-member', memberId:'DM34-001', name:'Membro Ativo', email:'membro@demolay.org.br', role:'member', status:'active', demoPassword:'demolay34' }
+];
+
+function getCategory(tag) {
+  return appData.categories.find(c => c.id === tag) || {
+    id: tag,
+    label: tag ? tag.charAt(0).toUpperCase() + tag.slice(1) : 'Categoria',
+    desc: 'Categoria de atividade do Capítulo.',
+    className: 'tag-social'
+  };
+}
+
+function sameId(a, b) {
+  return String(a) === String(b);
+}
+
+function inlineId(id) {
+  return String(id)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'");
+}
+
+function makeInitials(name) {
+  return String(name || '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(word => word[0])
+    .join('')
+    .toUpperCase() || 'DM';
+}
+
+function eventCardMarkup(e) {
+  const category = getCategory(e.tag);
+  return `
+    <div class="event-card">
+      <div class="event-date-block">
+        <div class="event-day">${e.day}</div>
+        <div class="event-month">${e.month}</div>
+      </div>
+      <div>
+        <div class="event-meta" style="margin-bottom:6px;">
+          <span class="tag ${category.className}">${category.label}</span>
+          <span style="font-size:12px;color:var(--muted);">${e.weekday}</span>
+        </div>
+        <h3 style="font-size:1rem;margin-bottom:4px;">${e.title}</h3>
+        <p style="font-size:13px;color:var(--muted);">${e.desc}</p>
+      </div>
+      <div style="text-align:right;white-space:nowrap;">
+        <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);">${e.time}</div>
+        <div class="event-location">📍 ${e.local}</div>
+      </div>
+    </div>
+  `;
+}
+
+// ===== RENDER PUBLIC =====
+function renderEvents() {
+  const container = document.getElementById('events-list');
+  renderCalendarTabs();
+  const filtered = selectedEventCategory === 'todos'
+    ? appData.events
+    : appData.events.filter(e => e.tag === selectedEventCategory);
+
+  container.innerHTML = filtered.length
+    ? filtered.map(eventCardMarkup).join('')
+    : '<div class="empty-state">Nenhuma atividade cadastrada nesta aba ainda.</div>';
+}
+
+function renderCalendarTabs() {
+  const tabs = document.getElementById('calendar-tabs');
+  if (!appData.events.length) {
+    tabs.innerHTML = '';
+    return;
+  }
+  const tabItems = [
+    { id:'todos', label:'Todas', count: appData.events.length },
+    ...appData.categories.map(c => ({ ...c, count: appData.events.filter(e => e.tag === c.id).length }))
+  ];
+
+  tabs.innerHTML = tabItems.map(c => `
+    <button class="calendar-tab ${selectedEventCategory === c.id ? 'active' : ''}" onclick="selectCategory('${c.id}')">
+      ${c.label} (${c.count})
+    </button>
+  `).join('');
+}
+
+function renderOfficials() {
+  const g = document.getElementById('officials-grid');
+  if (!appData.officials.length) {
+    g.innerHTML = '<div class="empty-state">Nenhum oficial cadastrado ainda.</div>';
+    return;
+  }
+  g.innerHTML = appData.officials.map(o => `
+    <div class="official-card">
+      <div class="official-avatar">${o.initials}</div>
+      <div class="official-role">${o.role}</div>
+      <div class="official-name">${o.name}</div>
+    </div>
+  `).join('');
+}
+
+function renderAdvisory() {
+  const g = document.getElementById('advisory-grid');
+  if (!appData.advisory.length) {
+    g.innerHTML = '<div class="empty-state">Nenhum conselheiro cadastrado ainda.</div>';
+    return;
+  }
+  g.innerHTML = appData.advisory.map(a => `
+    <div class="advisory-card">
+      <div class="advisory-avatar">${a.initials}</div>
+      <div class="advisory-info">
+        <h4>${a.name}</h4>
+        <p>${a.role}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSponsors() {
+  const g = document.getElementById('sponsors-grid');
+  if (!appData.sponsors.length) {
+    g.innerHTML = '<div class="empty-state">Nenhum patrocinador cadastrado ainda.</div>';
+    return;
+  }
+  g.innerHTML = appData.sponsors.map(s => `
+    <div class="sponsor-card">
+      <div class="sponsor-logo">${s.emoji}</div>
+      <div class="sponsor-name">${s.name}</div>
+      <div class="sponsor-type">${s.type}</div>
+    </div>
+  `).join('');
+}
+
+// ===== ADMIN RENDER =====
+function renderAdminEvents() {
+  const list = document.getElementById('admin-events-list');
+  if (!appData.events.length) {
+    list.innerHTML = '<div class="empty-state">Nenhum evento cadastrado ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.events.map(e => `
+    <div class="admin-row">
+      <div>
+        <strong>${e.day} ${e.month} — ${e.title}</strong>
+        <div style="font-size:12px;color:var(--muted);">${getCategory(e.tag).label} · ${e.desc}</div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-sm btn-edit" onclick="editEvent('${inlineId(e.id)}')">Editar</button>
+        <button class="btn-sm btn-del" onclick="deleteEvent('${inlineId(e.id)}')">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAdminCategories() {
+  const target = document.getElementById('admin-categories-list');
+  if (!target) return;
+  target.innerHTML = appData.categories.map(c => {
+    const count = appData.events.filter(e => e.tag === c.id).length;
+    return `
+      <div class="admin-row">
+        <div>
+          <strong>${c.label}</strong>
+          <div style="font-size:12px;color:var(--muted);">${c.desc}</div>
+          <div class="category-count">${count} atividade${count === 1 ? '' : 's'}</div>
+        </div>
+        <div class="admin-actions">
+          <button class="btn-sm btn-edit" onclick="editCategory('${c.id}')">Editar</button>
+          <button class="btn-sm btn-del" onclick="deleteCategory('${c.id}')">Excluir</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderAdminOfficials() {
+  const list = document.getElementById('admin-officials-list');
+  if (!appData.officials.length) {
+    list.innerHTML = '<div class="empty-state">Nenhum oficial cadastrado ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.officials.map(o => `
+    <div class="admin-row">
+      <div>
+        <strong>${o.name}</strong>
+        <div style="font-size:12px;color:var(--muted);">${o.role}</div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-sm btn-edit" onclick="editOfficial('${inlineId(o.id)}')">Editar</button>
+        <button class="btn-sm btn-del" onclick="deleteOfficial('${inlineId(o.id)}')">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAdminAdvisory() {
+  const list = document.getElementById('admin-advisory-list');
+  if (!appData.advisory.length) {
+    list.innerHTML = '<div class="empty-state">Nenhum conselheiro cadastrado ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.advisory.map(a => `
+    <div class="admin-row">
+      <div>
+        <strong>${a.name}</strong>
+        <div style="font-size:12px;color:var(--muted);">${a.role}</div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-sm btn-edit" onclick="editAdvisory('${inlineId(a.id)}')">Editar</button>
+        <button class="btn-sm btn-del" onclick="deleteAdvisory('${inlineId(a.id)}')">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAdminSponsors() {
+  const list = document.getElementById('admin-sponsors-list');
+  if (!appData.sponsors.length) {
+    list.innerHTML = '<div class="empty-state">Nenhum patrocinador cadastrado ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.sponsors.map(s => `
+    <div class="admin-row">
+      <div>
+        <strong>${s.name}</strong>
+        <div style="font-size:12px;color:var(--muted);">${s.type}</div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-sm btn-edit" onclick="editSponsor('${inlineId(s.id)}')">Editar</button>
+        <button class="btn-sm btn-del" onclick="deleteSponsor('${inlineId(s.id)}')">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSubmissions() {
+  const tbody = document.getElementById('submissions-body');
+  if (appData.submissions.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:2rem;">Nenhuma petição recebida ainda</td></tr>';
+    return;
+  }
+  tbody.innerHTML = appData.submissions.map((s, i) => {
+    const birth = new Date(s.birth);
+    const age = new Date().getFullYear() - birth.getFullYear();
+    const statusClass = s.status === 'approved' ? 'status-approved' : (s.status === 'review' ? 'status-review' : 'status-pending');
+    const statusLabel = s.status === 'approved' ? 'Aprovada' : (s.status === 'review' ? 'Em análise' : 'Pendente');
+    return `
+    <tr>
+      <td>${s.name}</td>
+      <td>${isNaN(age) ? '—' : age} anos</td>
+      <td>${s.email}</td>
+      <td>${s.phone}</td>
+      <td>${s.source || '—'}</td>
+      <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+      <td>
+        <div class="admin-actions">
+          <button class="btn-sm btn-edit" onclick="approveSubmission(${i})">Aprovar</button>
+          <button class="btn-sm btn-del" onclick="deleteSubmission(${i})">Excluir</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function renderMembersAdmin() {
+  const list = document.getElementById('admin-members-list');
+  if (!activeMembers.length) {
+    list.innerHTML = '<div class="empty-state">Nenhum membro carregado do Firebase.</div>';
+    return;
+  }
+  list.innerHTML = activeMembers.map(m => `
+    <div class="admin-row">
+      <div>
+        <strong>${m.name}</strong>
+        <div style="font-size:12px;color:var(--muted);">${m.email} · ID ${m.memberId || m.registration || '—'} · ${m.role === 'admin' ? 'Administrador' : 'Membro'}</div>
+      </div>
+      <span class="status-badge ${m.status === 'active' ? 'status-approved' : 'status-pending'}">${m.status === 'active' ? 'Ativo' : 'Inativo'}</span>
+    </div>
+  `).join('');
+}
+
+// ===== ACTIONS =====
+const siteTabRoutes = {
+  hero: 'inicio',
+  about: 'sobre',
+  'calendar-section': 'calendario',
+  'officials-section': 'oficiais',
+  'advisory-section': 'conselho',
+  'sponsors-section': 'patrocinadores',
+  'join-section': 'junte-se'
+};
+
+const routeToSiteTab = Object.entries(siteTabRoutes).reduce((routes, [pageId, route]) => {
+  routes[route] = pageId;
+  routes[pageId] = pageId;
+  return routes;
+}, {});
+
+function getSiteTabFromHash() {
+  const hash = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+  return routeToSiteTab[hash] || 'hero';
+}
+
+function openSiteTab(id, event, updateHash = true) {
+  if (event) event.preventDefault();
+  const page = document.getElementById(id);
+  const pageId = page && page.classList.contains('site-page') ? id : 'hero';
+
+  document.querySelectorAll('.site-page').forEach(section => {
+    section.classList.toggle('active', section.id === pageId);
+  });
+  document.querySelectorAll('[data-page-target]').forEach(link => {
+    link.classList.toggle('active', link.dataset.pageTarget === pageId);
+  });
+
+  const route = siteTabRoutes[pageId] || pageId;
+  if (updateHash && window.location.hash !== '#' + route) {
+    history.pushState(null, '', '#' + route);
+  }
+
+  const navLinks = document.getElementById('nav-links');
+  if (navLinks) navLinks.classList.remove('open');
+  window.scrollTo({ top: 0, behavior: updateHash ? 'smooth' : 'auto' });
+}
+
+function initSiteTabs() {
+  openSiteTab(getSiteTabFromHash(), null, false);
+  window.addEventListener('hashchange', () => {
+    openSiteTab(getSiteTabFromHash(), null, false);
+  });
+}
+
+function openLogoPreview() {
+  const preview = document.getElementById('logo-preview');
+  const previewImg = document.getElementById('logo-preview-img');
+  const navImg = document.querySelector('#nav-logo-wrap img');
+  if (!preview || !previewImg || !navImg) return;
+  previewImg.src = navImg.currentSrc || navImg.src;
+  preview.classList.add('open');
+  preview.setAttribute('aria-hidden', 'false');
+}
+
+function closeLogoPreview(event) {
+  if (event && event.target !== event.currentTarget) return;
+  const preview = document.getElementById('logo-preview');
+  if (!preview) return;
+  preview.classList.remove('open');
+  preview.setAttribute('aria-hidden', 'true');
+}
+
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('open');
+}
+
+function selectCategory(id) {
+  selectedEventCategory = id;
+  renderEvents();
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem('demolay-theme', theme);
+  const icon = document.getElementById('theme-toggle');
+  if (icon) icon.textContent = theme === 'light' ? '☀' : '☾';
+}
+
+function toggleTheme() {
+  const current = document.documentElement.dataset.theme || 'dark';
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+}
+
+function hasFirebaseConfig() {
+  const config = window.firebaseConfig || {};
+  return Boolean(
+    config.apiKey &&
+    config.projectId &&
+    !String(config.apiKey).includes('COLE_AQUI') &&
+    !String(config.projectId).includes('COLE_AQUI')
+  );
+}
+
+function showFirebaseStatus(message) {
+  const status = document.getElementById('firebase-status');
+  if (!status) return;
+  status.textContent = message;
+  status.classList.add('open');
+}
+
+function hideFirebaseStatus() {
+  const status = document.getElementById('firebase-status');
+  if (!status) return;
+  status.textContent = '';
+  status.classList.remove('open');
+}
+
+async function initFirebase() {
+  if (firebaseInitPromise) return firebaseInitPromise;
+
+  firebaseInitPromise = (async () => {
+    firebaseConfigured = hasFirebaseConfig();
+    if (!firebaseConfigured) {
+      demoMode = true;
+      showFirebaseStatus('Firebase ainda não configurado. Preencha firebase-config.js para conectar Auth e Firestore.');
+      return null;
+    }
+
+    const version = '12.14.0';
+    const [appMod, authMod, firestoreMod] = await Promise.all([
+      import(`https://www.gstatic.com/firebasejs/${version}/firebase-app.js`),
+      import(`https://www.gstatic.com/firebasejs/${version}/firebase-auth.js`),
+      import(`https://www.gstatic.com/firebasejs/${version}/firebase-firestore.js`)
+    ]);
+
+    const app = appMod.initializeApp(window.firebaseConfig);
+    const auth = authMod.getAuth(app);
+    const db = firestoreMod.getFirestore(app);
+    const secondaryApp = appMod.initializeApp(window.firebaseConfig, 'member-registration');
+    const secondaryAuth = authMod.getAuth(secondaryApp);
+
+    firebaseServices = {
+      app,
+      auth,
+      db,
+      secondaryAuth,
+      signInWithEmailAndPassword: authMod.signInWithEmailAndPassword,
+      createUserWithEmailAndPassword: authMod.createUserWithEmailAndPassword,
+      signOut: authMod.signOut,
+      onAuthStateChanged: authMod.onAuthStateChanged,
+      collection: firestoreMod.collection,
+      doc: firestoreMod.doc,
+      addDoc: firestoreMod.addDoc,
+      getDoc: firestoreMod.getDoc,
+      getDocs: firestoreMod.getDocs,
+      setDoc: firestoreMod.setDoc,
+      updateDoc: firestoreMod.updateDoc,
+      deleteDoc: firestoreMod.deleteDoc,
+      serverTimestamp: firestoreMod.serverTimestamp,
+      query: firestoreMod.query,
+      orderBy: firestoreMod.orderBy,
+      where: firestoreMod.where,
+      limit: firestoreMod.limit
+    };
+
+    hideFirebaseStatus();
+    return firebaseServices;
+  })();
+
+  return firebaseInitPromise;
+}
+
+async function requireFirebase() {
+  const services = await initFirebase();
+  if (!services) {
+    throw new Error('Firebase ainda não configurado. Preencha firebase-config.js com as chaves do seu projeto.');
+  }
+  return services;
+}
+
+function normalizeEvent(docId, data) {
+  return {
+    id: data.id ?? docId,
+    day: data.day ?? '',
+    month: data.month ?? '',
+    weekday: data.weekday ?? '',
+    title: data.title ?? '',
+    desc: data.desc ?? '',
+    tag: data.tag ?? 'social',
+    local: data.local ?? 'São José do Rio Preto, SP',
+    time: data.time ?? ''
+  };
+}
+
+function normalizeOfficial(docId, data) {
+  const name = data.name ?? '';
+  return {
+    id: data.id ?? docId,
+    role: data.role ?? '',
+    name,
+    initials: data.initials || makeInitials(name)
+  };
+}
+
+function normalizeAdvisory(docId, data) {
+  const name = data.name ?? '';
+  return {
+    id: data.id ?? docId,
+    name,
+    role: data.role ?? 'Conselheiro',
+    initials: data.initials || makeInitials(name)
+  };
+}
+
+function normalizeSponsor(docId, data) {
+  return {
+    id: data.id ?? docId,
+    name: data.name ?? '',
+    type: data.type ?? 'Apoiador',
+    emoji: data.emoji ?? '🤝'
+  };
+}
+
+function sortByIdOrName(items) {
+  return items.sort((a, b) => {
+    const numA = Number(a.id);
+    const numB = Number(b.id);
+    if (!Number.isNaN(numA) && !Number.isNaN(numB)) return numA - numB;
+    return String(a.name || a.title || '').localeCompare(String(b.name || b.title || ''), 'pt-BR');
+  });
+}
+
+async function loadManagedSiteData() {
+  try {
+    const fb = await initFirebase();
+    if (!fb) return;
+
+    const [eventsSnapshot, officialsSnapshot, advisorySnapshot, sponsorsSnapshot] = await Promise.all([
+      fb.getDocs(fb.collection(fb.db, 'events')),
+      fb.getDocs(fb.collection(fb.db, 'officials')),
+      fb.getDocs(fb.collection(fb.db, 'advisory')),
+      fb.getDocs(fb.collection(fb.db, 'sponsors'))
+    ]);
+
+    appData.events = sortByIdOrName(eventsSnapshot.docs.map(docSnap => normalizeEvent(docSnap.id, docSnap.data())));
+    appData.officials = sortByIdOrName(officialsSnapshot.docs.map(docSnap => normalizeOfficial(docSnap.id, docSnap.data())));
+    appData.advisory = sortByIdOrName(advisorySnapshot.docs.map(docSnap => normalizeAdvisory(docSnap.id, docSnap.data())));
+    appData.sponsors = sortByIdOrName(sponsorsSnapshot.docs.map(docSnap => normalizeSponsor(docSnap.id, docSnap.data())));
+
+    renderEvents();
+    renderOfficials();
+    renderAdvisory();
+    renderSponsors();
+    if (currentMember) renderMemberArea();
+  } catch (err) {
+    showFirebaseStatus('Não foi possível carregar dados do Firestore. Confira se as regras foram publicadas.');
+    console.error(err);
+  }
+}
+
+async function saveManagedRecord(collectionName, item, isNew = false) {
+  const fb = await requireFirebase();
+  const id = String(item.id);
+  await fb.setDoc(fb.doc(fb.db, collectionName, id), {
+    ...item,
+    id,
+    ...(isNew ? { createdAt: fb.serverTimestamp() } : {}),
+    updatedAt: fb.serverTimestamp()
+  }, { merge: true });
+}
+
+async function deleteManagedRecord(collectionName, id) {
+  const fb = await requireFirebase();
+  await fb.deleteDoc(fb.doc(fb.db, collectionName, String(id)));
+}
+
+function normalizeMember(uid, data) {
+  return {
+    uid,
+    name: data.name || 'DeMolay',
+    email: data.email || '',
+    memberId: data.memberId || data.registration || '',
+    registration: data.memberId || data.registration || '',
+    role: data.role || 'member',
+    status: data.status || 'inactive'
+  };
+}
+
+async function getMemberByUid(uid, email = '') {
+  const fb = await requireFirebase();
+  const snap = await fb.getDoc(fb.doc(fb.db, 'members', uid));
+  if (snap.exists()) return normalizeMember(uid, snap.data());
+
+  if (!email) return null;
+  const fallback = await fb.getDocs(fb.query(
+    fb.collection(fb.db, 'members'),
+    fb.where('email', '==', email),
+    fb.limit(1)
+  ));
+  if (fallback.empty) return null;
+  const docSnap = fallback.docs[0];
+  return normalizeMember(docSnap.id, docSnap.data());
+}
+
+function openLogin() {
+  if (currentMember) {
+    openMemberArea();
+    return;
+  }
+  document.getElementById('login-modal').classList.add('open');
+}
+function closeLogin() { document.getElementById('login-modal').classList.remove('open'); document.getElementById('login-error').style.display='none'; }
+
+function showLoginError(message) {
+  const error = document.getElementById('login-error');
+  error.textContent = message;
+  error.style.display = 'block';
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-user').value.trim();
+  const password = document.getElementById('login-pass').value;
+  if (!email || !password) {
+    showLoginError('Informe e-mail e senha.');
+    return;
+  }
+
+  try {
+    const fb = await initFirebase();
+    if (!fb) {
+      const demo = demoMembers.find(m => m.email.toLowerCase() === email.toLowerCase() && m.demoPassword === password);
+      if (!demo) throw new Error('Credenciais inválidas no modo demonstração.');
+      currentMember = demo;
+      closeLogin();
+      openMemberArea();
+      return;
+    }
+
+    const credential = await fb.signInWithEmailAndPassword(fb.auth, email, password);
+    const member = await getMemberByUid(credential.user.uid, credential.user.email || email);
+    if (!member || member.status !== 'active') {
+      await fb.signOut(fb.auth);
+      throw new Error('Credenciais válidas, mas este DeMolay não está ativo no Firestore.');
+    }
+    currentMember = member;
+    closeLogin();
+    openMemberArea();
+  } catch (err) {
+    showLoginError(err.message || 'Não foi possível entrar.');
+  }
+}
+
+function renderMemberArea() {
+  if (!currentMember) return;
+  document.getElementById('member-panel-name').textContent = currentMember.name;
+  document.getElementById('member-panel-meta').textContent =
+    `${currentMember.email} · ID ${currentMember.memberId || currentMember.registration || '—'} · ${currentMember.role === 'admin' ? 'Administrador' : 'Membro ativo'}`;
+  document.getElementById('member-admin-button').style.display = currentMember.role === 'admin' ? 'inline-flex' : 'none';
+  document.getElementById('member-login-button').textContent = 'Minha área';
+
+  const nextEvents = appData.events.slice(0, 4);
+  document.getElementById('member-next-events').innerHTML = nextEvents.length
+    ? nextEvents.map(e => `
+      <li><strong style="color:var(--text);">${e.day} ${e.month}</strong> · ${e.title} · ${e.time}</li>
+    `).join('')
+    : '<li>Nenhuma atividade cadastrada ainda.</li>';
+
+  document.getElementById('member-category-summary').innerHTML = appData.categories.map(c => {
+    const count = appData.events.filter(e => e.tag === c.id).length;
+    return `<span class="tag ${c.className}" style="width:max-content;">${c.label}: ${count}</span>`;
+  }).join('');
+}
+
+function openMemberArea() {
+  if (!currentMember) {
+    openLogin();
+    return;
+  }
+  renderMemberArea();
+  document.getElementById('member-panel').classList.add('open');
+}
+
+async function logoutMember() {
+  try {
+    const fb = await initFirebase();
+    if (fb) await fb.signOut(fb.auth);
+  } catch (_) {}
+  currentMember = null;
+  document.getElementById('member-panel').classList.remove('open');
+  document.getElementById('admin-panel').classList.remove('open');
+  document.getElementById('member-login-button').textContent = 'Área do DeMolay';
+}
+
+async function openAdmin() {
+  if (!currentMember || currentMember.role !== 'admin') {
+    alert('Apenas administradores ativos podem acessar este painel.');
+    return;
+  }
+  document.getElementById('admin-panel').classList.add('open');
+  await loadManagedSiteData();
+  renderAdminEvents(); renderAdminCategories(); renderAdminOfficials(); renderAdminAdvisory();
+  renderAdminSponsors(); renderSubmissions();
+  await loadPetitions();
+  await loadMembers();
+}
+
+function closeAdmin() { document.getElementById('admin-panel').classList.remove('open'); }
+
+function adminTab(name, trigger) {
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (trigger) trigger.classList.add('active');
+  if (name === 'members') loadMembers();
+  if (name === 'submissions') loadPetitions();
+}
+
+async function submitForm() {
+  const name = document.getElementById('f-name').value;
+  const birth = document.getElementById('f-birth').value;
+  const email = document.getElementById('f-email').value;
+  const phone = document.getElementById('f-phone').value;
+  if (!name || !birth || !email || !phone) { alert('Por favor, preencha os campos obrigatórios (*)'); return; }
+  const payload = {
+    name, birth, email, phone,
+    guardian: document.getElementById('f-guardian').value,
+    source: document.getElementById('f-source').value,
+    msg: document.getElementById('f-msg').value
+  };
+  try {
+    const fb = await initFirebase();
+    if (fb) {
+      await fb.addDoc(fb.collection(fb.db, 'petitions'), {
+        ...payload,
+        status: 'pending',
+        createdAt: fb.serverTimestamp()
+      });
+    } else {
+      appData.submissions.push({ ...payload, status:'pending' });
+    }
+  } catch (_) {
+    appData.submissions.push({ ...payload, status:'pending' });
+  }
+  document.getElementById('form-success').style.display = 'block';
+  document.querySelectorAll('#join-form input, #join-form select, #join-form textarea').forEach(el => el.value = '');
+  renderSubmissions();
+}
+
+function downloadForm() {
+  // Creates a simple PDF-like form as text download
+  const content = `FORMULÁRIO DE PETIÇÃO - CAPÍTULO DEMOLAY SÃO JOSÉ DO RIO PRETO Nº34\n\n` +
+    `Nome completo: ___________________________________\n` +
+    `Data de nascimento: ___/___/______\n` +
+    `Endereço: ________________________________________\n` +
+    `CEP: ___________ Cidade: _________________ Estado: ___\n` +
+    `Telefone: (  ) ___________  WhatsApp: (  ) ___________\n` +
+    `E-mail: __________________________________________\n` +
+    `Nome do pai/responsável: _________________________\n` +
+    `Profissão do responsável: ________________________\n\n` +
+    `Declaro que desejo fazer parte da Ordem DeMolay e concordo em seguir seus preceitos.\n\n` +
+    `Assinatura: ______________________  Data: ___/___/______\n\n` +
+    `Assinatura do responsável: ______________________\n\n` +
+    `Envie este formulário preenchido para: capitulo34@demolay.org.br\n` +
+    `ou entregue pessoalmente nas nossas reuniões (toda sexta-feira às 19h30)`;
+  const blob = new Blob([content], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'Peticao-DeMolay-SJRP-34.txt'; a.click();
+}
+
+// Admin CRUD helpers
+async function addEvent() {
+  const title = prompt('Título do evento:'); if (!title) return;
+  const day = parseInt(prompt('Dia:'), 10);
+  const month = prompt('Mês (ex: JUL):');
+  const desc = prompt('Descrição:') || '';
+  const tag = prompt(`Categoria (${appData.categories.map(c => c.id).join('/')}):`) || 'social';
+  const time = prompt('Horário (ex: 19:30):') || '19:00';
+  const local = prompt('Local:', 'São José do Rio Preto, SP') || 'São José do Rio Preto, SP';
+  const weekday = prompt('Dia da semana:', 'Sexta-feira') || 'Sexta-feira';
+  const event = { id: String(Date.now()), day, month, weekday, title, desc, tag, local, time };
+  try {
+    await saveManagedRecord('events', event, true);
+    appData.events.push(event);
+    appData.events = sortByIdOrName(appData.events);
+    renderEvents(); renderAdminEvents(); renderAdminCategories();
+  } catch (err) {
+    alert('Não foi possível salvar o evento no Firestore: ' + err.message);
+  }
+}
+async function editEvent(id) {
+  const e = appData.events.find(x => sameId(x.id, id)); if (!e) return;
+  const before = { ...e };
+  const t = prompt('Novo título:', e.title); if (t) e.title = t;
+  const day = parseInt(prompt('Dia:', e.day), 10); if (!Number.isNaN(day)) e.day = day;
+  const month = prompt('Mês:', e.month); if (month) e.month = month;
+  const weekday = prompt('Dia da semana:', e.weekday); if (weekday) e.weekday = weekday;
+  const d = prompt('Nova descrição:', e.desc); if (d) e.desc = d;
+  const tag = prompt(`Categoria (${appData.categories.map(c => c.id).join('/')}):`, e.tag); if (tag) e.tag = tag;
+  const time = prompt('Horário:', e.time); if (time) e.time = time;
+  const local = prompt('Local:', e.local); if (local) e.local = local;
+  try {
+    await saveManagedRecord('events', e);
+    renderEvents(); renderAdminEvents(); renderAdminCategories();
+    if (currentMember) renderMemberArea();
+  } catch (err) {
+    Object.assign(e, before);
+    renderEvents(); renderAdminEvents(); renderAdminCategories();
+    alert('Não foi possível atualizar o evento no Firestore: ' + err.message);
+  }
+}
+async function deleteEvent(id) {
+  if (!confirm('Excluir evento?')) return;
+  try {
+    await deleteManagedRecord('events', id);
+    appData.events = appData.events.filter(x => !sameId(x.id, id));
+    renderEvents(); renderAdminEvents(); renderAdminCategories();
+    if (currentMember) renderMemberArea();
+  } catch (err) {
+    alert('Não foi possível excluir o evento no Firestore: ' + err.message);
+  }
+}
+function addCategory() {
+  const id = (prompt('Identificador curto (ex: esporte):') || '').trim().toLowerCase().replace(/\s+/g, '-');
+  if (!id) return;
+  if (appData.categories.some(c => c.id === id)) { alert('Esta categoria já existe.'); return; }
+  const label = prompt('Nome da categoria:') || id;
+  const desc = prompt('Descrição:') || 'Categoria de atividade do Capítulo.';
+  appData.categories.push({ id, label, desc, className:'tag-social' });
+  renderEvents(); renderAdminCategories();
+}
+function editCategory(id) {
+  const c = appData.categories.find(x => x.id === id); if (!c) return;
+  const label = prompt('Nome da categoria:', c.label); if (label) c.label = label;
+  const desc = prompt('Descrição:', c.desc); if (desc) c.desc = desc;
+  renderEvents(); renderAdminEvents(); renderAdminCategories();
+}
+function deleteCategory(id) {
+  if (appData.events.some(e => e.tag === id)) {
+    alert('Não é possível excluir uma categoria que possui eventos cadastrados.');
+    return;
+  }
+  if (!confirm('Excluir categoria?')) return;
+  appData.categories = appData.categories.filter(c => c.id !== id);
+  if (selectedEventCategory === id) selectedEventCategory = 'todos';
+  renderEvents(); renderAdminCategories();
+}
+async function addOfficial() {
+  const role = prompt('Cargo:'); if (!role) return;
+  const name = prompt('Nome:'); if (!name) return;
+  const official = { id: String(Date.now()), role, name, initials: makeInitials(name) };
+  try {
+    await saveManagedRecord('officials', official, true);
+    appData.officials.push(official);
+    appData.officials = sortByIdOrName(appData.officials);
+    renderOfficials(); renderAdminOfficials();
+  } catch (err) {
+    alert('Não foi possível salvar o oficial no Firestore: ' + err.message);
+  }
+}
+async function editOfficial(id) {
+  const o = appData.officials.find(x => sameId(x.id, id)); if (!o) return;
+  const before = { ...o };
+  const n = prompt('Novo nome:', o.name); if (n) { o.name = n; o.initials = makeInitials(n); }
+  const r = prompt('Novo cargo:', o.role); if (r) o.role = r;
+  try {
+    await saveManagedRecord('officials', o);
+    renderOfficials(); renderAdminOfficials();
+  } catch (err) {
+    Object.assign(o, before);
+    renderOfficials(); renderAdminOfficials();
+    alert('Não foi possível atualizar o oficial no Firestore: ' + err.message);
+  }
+}
+async function deleteOfficial(id) {
+  if (!confirm('Excluir oficial?')) return;
+  try {
+    await deleteManagedRecord('officials', id);
+    appData.officials = appData.officials.filter(x => !sameId(x.id, id));
+    renderOfficials(); renderAdminOfficials();
+  } catch (err) {
+    alert('Não foi possível excluir o oficial no Firestore: ' + err.message);
+  }
+}
+async function addAdvisory() {
+  const name = prompt('Nome do conselheiro:'); if (!name) return;
+  const role = prompt('Cargo/função:') || 'Conselheiro';
+  const advisory = { id: String(Date.now()), name, role, initials: makeInitials(name) };
+  try {
+    await saveManagedRecord('advisory', advisory, true);
+    appData.advisory.push(advisory);
+    appData.advisory = sortByIdOrName(appData.advisory);
+    renderAdvisory(); renderAdminAdvisory();
+  } catch (err) {
+    alert('Não foi possível salvar o conselheiro no Firestore: ' + err.message);
+  }
+}
+async function editAdvisory(id) {
+  const a = appData.advisory.find(x => sameId(x.id, id)); if (!a) return;
+  const before = { ...a };
+  const n = prompt('Novo nome:', a.name); if (n) { a.name = n; a.initials = makeInitials(n); }
+  const r = prompt('Novo cargo:', a.role); if (r) a.role = r;
+  try {
+    await saveManagedRecord('advisory', a);
+    renderAdvisory(); renderAdminAdvisory();
+  } catch (err) {
+    Object.assign(a, before);
+    renderAdvisory(); renderAdminAdvisory();
+    alert('Não foi possível atualizar o conselheiro no Firestore: ' + err.message);
+  }
+}
+async function deleteAdvisory(id) {
+  if (!confirm('Excluir conselheiro?')) return;
+  try {
+    await deleteManagedRecord('advisory', id);
+    appData.advisory = appData.advisory.filter(x => !sameId(x.id, id));
+    renderAdvisory(); renderAdminAdvisory();
+  } catch (err) {
+    alert('Não foi possível excluir o conselheiro no Firestore: ' + err.message);
+  }
+}
+async function addSponsor() {
+  const name = prompt('Nome do patrocinador:'); if (!name) return;
+  const type = prompt('Tipo (Patrocinador Ouro / Prata / Apoiador):') || 'Apoiador';
+  const emoji = prompt('Emoji representativo (ex: 🏢):') || '🤝';
+  const sponsor = { id: String(Date.now()), name, type, emoji };
+  try {
+    await saveManagedRecord('sponsors', sponsor, true);
+    appData.sponsors.push(sponsor);
+    appData.sponsors = sortByIdOrName(appData.sponsors);
+    renderSponsors(); renderAdminSponsors();
+  } catch (err) {
+    alert('Não foi possível salvar o patrocinador no Firestore: ' + err.message);
+  }
+}
+async function editSponsor(id) {
+  const s = appData.sponsors.find(x => sameId(x.id, id)); if (!s) return;
+  const before = { ...s };
+  const n = prompt('Novo nome:', s.name); if (n) s.name = n;
+  const t = prompt('Novo tipo:', s.type); if (t) s.type = t;
+  const emoji = prompt('Emoji representativo:', s.emoji); if (emoji) s.emoji = emoji;
+  try {
+    await saveManagedRecord('sponsors', s);
+    renderSponsors(); renderAdminSponsors();
+  } catch (err) {
+    Object.assign(s, before);
+    renderSponsors(); renderAdminSponsors();
+    alert('Não foi possível atualizar o patrocinador no Firestore: ' + err.message);
+  }
+}
+async function deleteSponsor(id) {
+  if (!confirm('Excluir patrocinador?')) return;
+  try {
+    await deleteManagedRecord('sponsors', id);
+    appData.sponsors = appData.sponsors.filter(x => !sameId(x.id, id));
+    renderSponsors(); renderAdminSponsors();
+  } catch (err) {
+    alert('Não foi possível excluir o patrocinador no Firestore: ' + err.message);
+  }
+}
+async function approveSubmission(i) {
+  const submission = appData.submissions[i];
+  submission.status = 'approved';
+  if (submission.id && currentMember?.role === 'admin') {
+    try {
+      const fb = await requireFirebase();
+      await fb.updateDoc(fb.doc(fb.db, 'petitions', submission.id), { status:'approved' });
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+  alert('Petição aprovada.');
+  renderSubmissions();
+}
+async function deleteSubmission(i) {
+  if (!confirm('Excluir esta petição?')) return;
+  const submission = appData.submissions[i];
+  if (submission.id && currentMember?.role === 'admin') {
+    try {
+      const fb = await requireFirebase();
+      await fb.deleteDoc(fb.doc(fb.db, 'petitions', submission.id));
+    } catch (err) {
+      alert(err.message);
+      return;
+    }
+  }
+  appData.submissions.splice(i, 1);
+  renderSubmissions();
+}
+function handlePhotos(input) {
+  const grid = document.getElementById('photo-grid');
+  Array.from(input.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.cssText = 'width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;border:1px solid var(--border)';
+      grid.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function updateLogo(url) {
+  if (!url) return;
+  const wrap = document.getElementById('nav-logo-wrap');
+  wrap.innerHTML = `<img src="${url}" alt="Logo" onerror="this.parentElement.innerHTML='34'">`;
+}
+
+async function loadMembers() {
+  if (!currentMember || currentMember.role !== 'admin') return;
+  try {
+    const fb = await initFirebase();
+    if (!fb) {
+      activeMembers = demoMembers;
+      renderMembersAdmin();
+      return;
+    }
+    const snapshot = await fb.getDocs(fb.query(fb.collection(fb.db, 'members'), fb.orderBy('name')));
+    activeMembers = snapshot.docs.map(docSnap => normalizeMember(docSnap.id, docSnap.data()));
+    renderMembersAdmin();
+  } catch (err) {
+    document.getElementById('admin-members-list').innerHTML =
+      `<div class="empty-state">${err.message}</div>`;
+  }
+}
+
+async function loadPetitions() {
+  if (!currentMember || currentMember.role !== 'admin') return;
+  try {
+    const fb = await initFirebase();
+    if (!fb) {
+      renderSubmissions();
+      return;
+    }
+    const snapshot = await fb.getDocs(fb.query(fb.collection(fb.db, 'petitions'), fb.orderBy('createdAt', 'desc')));
+    appData.submissions = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+  } catch (_) {}
+  renderSubmissions();
+}
+
+async function createMember() {
+  if (!currentMember || currentMember.role !== 'admin') {
+    alert('Faça login como administrador ativo para cadastrar membros.');
+    return;
+  }
+  const payload = {
+    memberId: document.getElementById('m-member-id').value.trim(),
+    name: document.getElementById('m-name').value.trim(),
+    email: document.getElementById('m-email').value.trim(),
+    password: document.getElementById('m-password').value,
+    role: document.getElementById('m-role').value,
+    status: document.getElementById('m-status').value
+  };
+  if (!payload.memberId || !payload.name || !payload.email || !payload.password) {
+    alert('Preencha ID, nome, e-mail e senha.');
+    return;
+  }
+  try {
+    const fb = await requireFirebase();
+    const credential = await fb.createUserWithEmailAndPassword(fb.secondaryAuth, payload.email, payload.password);
+    await fb.setDoc(fb.doc(fb.db, 'members', credential.user.uid), {
+      memberId: payload.memberId,
+      name: payload.name,
+      email: payload.email,
+      role: payload.role,
+      status: payload.status,
+      uid: credential.user.uid,
+      createdAt: fb.serverTimestamp(),
+      updatedAt: fb.serverTimestamp()
+    });
+    await fb.signOut(fb.secondaryAuth);
+    document.querySelectorAll('#tab-members input').forEach(el => el.value = '');
+    document.getElementById('member-create-success').style.display = 'block';
+    await loadMembers();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+async function initSession() {
+  try {
+    const fb = await initFirebase();
+    if (!fb) return;
+    fb.onAuthStateChanged(fb.auth, async user => {
+      if (!user) {
+        currentMember = null;
+        document.getElementById('member-login-button').textContent = 'Área do DeMolay';
+        return;
+      }
+      const member = await getMemberByUid(user.uid, user.email);
+      currentMember = member && member.status === 'active' ? member : null;
+      document.getElementById('member-login-button').textContent = currentMember ? 'Minha área' : 'Área do DeMolay';
+    });
+  } catch (_) {
+    currentMember = null;
+  }
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('demolay-theme');
+  const preferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  applyTheme(saved || preferred);
+}
+
+// Enter to login
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('logo-preview').classList.contains('open')) closeLogoPreview();
+  if (e.key === 'Enter' && document.getElementById('login-modal').classList.contains('open')) doLogin();
+});
+
+// Init
+initTheme();
+renderEvents(); renderOfficials(); renderAdvisory(); renderSponsors();
+loadManagedSiteData();
+initSiteTabs();
+initSession();
+</script>
+</body>
+</html>
