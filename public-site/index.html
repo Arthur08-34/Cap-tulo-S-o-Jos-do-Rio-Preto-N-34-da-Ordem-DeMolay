@@ -256,18 +256,21 @@
     max-width: 720px; margin-top: -1.5rem; margin-bottom: 2rem;
   }
   .showcase-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
   .showcase-card {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; overflow: hidden;
+    border-radius: 8px; overflow: hidden; text-align: left; cursor: pointer;
+    padding: 0; appearance: none; width: 100%; color: inherit;
+    font: inherit;
     transition: border-color 0.2s, transform 0.2s;
   }
   .showcase-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-2px); }
+  .showcase-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   .showcase-photo-grid {
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 4px; padding: 4px; aspect-ratio: 16 / 10; background: var(--surface);
+    gap: 4px; padding: 4px; aspect-ratio: 16 / 9; background: var(--surface);
   }
   .showcase-photo-grid.single { grid-template-columns: 1fr; }
   .showcase-photo-grid img {
@@ -281,6 +284,37 @@
   .showcase-body { padding: 1.1rem; }
   .showcase-body h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
   .showcase-body p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+  .showcase-open-hint {
+    color: var(--gold); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase; margin-top: 0.85rem;
+  }
+  .carousel-modal { max-width: min(920px, calc(100vw - 2rem)); }
+  .carousel-frame {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; min-height: min(62vh, 560px); overflow: hidden;
+  }
+  .carousel-frame img {
+    width: 100%; max-height: min(62vh, 560px); object-fit: contain; display: block;
+  }
+  .carousel-empty {
+    min-height: 280px; display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 14px;
+  }
+  .carousel-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.45); background: rgba(10,10,10,0.72);
+    color: var(--gold); cursor: pointer; font-size: 24px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .carousel-nav:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); }
+  .carousel-nav:disabled { opacity: 0.35; cursor: default; }
+  .carousel-prev { left: 12px; }
+  .carousel-next { right: 12px; }
+  .carousel-info { margin-top: 1rem; display: grid; gap: 0.4rem; }
+  .carousel-info p { color: var(--muted); line-height: 1.65; font-size: 14px; }
+  .carousel-counter { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
 
   .category-count { color: var(--gold); font-size: 11px; font-weight: 700; margin-top: 8px; text-transform: uppercase; }
   .empty-state {
@@ -633,6 +667,7 @@
     .hamburger { display: flex; }
     .about-grid { grid-template-columns: 1fr; }
     .member-hero, .member-grid { grid-template-columns: 1fr; }
+    .showcase-grid { grid-template-columns: 1fr; }
     .event-card { grid-template-columns: 1fr; }
     .event-card > div:last-child { text-align: left; }
     .form-grid { grid-template-columns: 1fr; }
@@ -746,8 +781,8 @@
         <div class="stat-label">Virtudes DeMolay</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">150+</div>
-        <div class="stat-label">Ex-membros formados</div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Jovens formados</div>
       </div>
     </div>
   </div>
@@ -988,7 +1023,7 @@
         </div>
         <div class="form-group full">
           <label>Foto da atividade (URL)</label>
-          <input type="url" id="event-image-url" placeholder="https://...">
+          <input type="url" id="event-image-url" placeholder="https://.../foto.jpg">
         </div>
       </div>
       <div class="modal-error" id="event-modal-error"></div>
@@ -1023,7 +1058,7 @@
         </div>
         <div class="form-group">
           <label>Logo (URL)</label>
-          <input type="url" id="sponsor-logo-url-field" placeholder="https://...">
+          <input type="url" id="sponsor-logo-url-field" placeholder="https://.../logo.png">
         </div>
       </div>
       <div class="modal-error" id="sponsor-modal-error"></div>
@@ -1062,6 +1097,26 @@
         <button class="btn-download" type="button" onclick="closeShowcaseModal()">Cancelar</button>
         <button class="btn-primary" type="button" id="showcase-modal-save" onclick="submitShowcaseModal()" style="border:none;">Salvar evento</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOWCASE CAROUSEL MODAL -->
+<div class="modal-overlay" id="showcase-carousel-modal" onclick="closeShowcaseCarousel(event)">
+  <div class="modal modal-wide carousel-modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="showcase-carousel-title">Evento</h3>
+      <button class="modal-close" onclick="closeShowcaseCarousel()">×</button>
+    </div>
+    <div class="carousel-frame" id="showcase-carousel-frame">
+      <button class="carousel-nav carousel-prev" type="button" onclick="changeShowcasePhoto(-1)" aria-label="Foto anterior">‹</button>
+      <img id="showcase-carousel-image" src="" alt="">
+      <div class="carousel-empty" id="showcase-carousel-empty">Nenhuma foto cadastrada para este evento.</div>
+      <button class="carousel-nav carousel-next" type="button" onclick="changeShowcasePhoto(1)" aria-label="Próxima foto">›</button>
+    </div>
+    <div class="carousel-info">
+      <div class="carousel-counter" id="showcase-carousel-counter"></div>
+      <p id="showcase-carousel-desc"></p>
     </div>
   </div>
 </div>
@@ -1392,9 +1447,8 @@ let appData = {
   showcaseEvents: [],
   categories: [
     { id:'ritual', label:'Reunião', desc:'Reuniões, cerimônias e trabalhos internos do Capítulo.', className:'tag-ritual' },
-    { id:'social', label:'Social', desc:'Confraternizações, integração entre membros e atividades abertas à família.', className:'tag-social' },
+    { id:'social', label:'Cerimônias públicas', desc:'Cerimônias públicas e atividades abertas à família e à comunidade.', className:'tag-social' },
     { id:'filantropia', label:'Filantropia', desc:'Campanhas, arrecadações e ações de serviço à comunidade.', className:'tag-filantropia' },
-    { id:'formacao', label:'Formação', desc:'Palestras, estudos, treinamentos e desenvolvimento de liderança.', className:'tag-formacao' },
   ],
   officials: fixedOfficialRoles.map(makeFixedOfficial),
   advisory: fixedAdvisoryRoles.map(makeFixedAdvisory),
@@ -1415,6 +1469,8 @@ let eventModalMode = 'create';
 let editingEventId = null;
 let showcaseModalMode = 'create';
 let editingShowcaseId = null;
+let activeShowcaseCarouselId = null;
+let activeShowcasePhotoIndex = 0;
 let sponsorModalMode = 'create';
 let editingSponsorId = null;
 
@@ -1451,6 +1507,66 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+function normalizeImageUrl(value) {
+  let url = String(value ?? '').trim();
+  if (!url) return '';
+  if (/^www\./i.test(url)) url = 'https://' + url;
+
+  const driveFile = url.match(/drive\.google\.com\/file\/d\/([^/?#]+)/i);
+  if (driveFile) return `https://drive.google.com/uc?export=view&id=${driveFile[1]}`;
+
+  try {
+    const parsed = new URL(url, window.location.href);
+    if (/drive\.google\.com$/i.test(parsed.hostname) && parsed.searchParams.get('id')) {
+      return `https://drive.google.com/uc?export=view&id=${parsed.searchParams.get('id')}`;
+    }
+    if (/dropbox\.com$/i.test(parsed.hostname)) {
+      parsed.hostname = 'dl.dropboxusercontent.com';
+      parsed.searchParams.delete('dl');
+      parsed.searchParams.delete('raw');
+      return parsed.toString();
+    }
+  } catch (_) {}
+
+  return url;
+}
+
+function isOwnSitePageUrl(url) {
+  try {
+    const parsed = new URL(url, window.location.href);
+    const current = new URL(window.location.href);
+    const isImagePath = /\.(png|jpe?g|gif|webp|svg|avif|ico)(\?|#|$)/i.test(parsed.pathname);
+    return parsed.origin === current.origin && !isImagePath;
+  } catch (_) {
+    return false;
+  }
+}
+
+function displayImageUrl(value) {
+  const normalized = normalizeImageUrl(value);
+  if (!normalized || isOwnSitePageUrl(normalized)) return '';
+  return normalized;
+}
+
+function normalizeEnteredImageUrl(value, label) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return '';
+  const normalized = displayImageUrl(raw);
+  if (!normalized) {
+    throw new Error(`${label} precisa ser um link direto de imagem, não uma página do site.`);
+  }
+  return normalized;
+}
+
+function fallbackSponsorLogoUrl(sponsor) {
+  const key = normalizeRoleKey(sponsor?.name || '');
+  return key.includes('capitulo') || key.includes('demolay') ? 'assets/logo-demolay-sjrp-nav.png' : '';
+}
+
+function sponsorDisplayLogoUrl(sponsor) {
+  return displayImageUrl(sponsor?.logoUrl) || fallbackSponsorLogoUrl(sponsor);
 }
 
 function calculateAge(birthValue) {
@@ -1575,9 +1691,13 @@ function normalizeCategoryId(value, fallback = 'social') {
     ritualistica: 'ritual',
     ritualisticas: 'ritual',
     social: 'social',
+    cerimonias: 'social',
+    cerimoniaspublicas: 'social',
+    cerimônias: 'social',
+    cerimôniaspublicas: 'social',
     filantropia: 'filantropia',
     beneficencia: 'filantropia',
-    formacao: 'formacao'
+    formacao: 'social'
   };
   const category = appData.categories.find(c =>
     normalizeRoleKey(c.id) === key || normalizeRoleKey(c.label) === key
@@ -1661,14 +1781,78 @@ function renderShowcaseEvents() {
     return;
   }
   g.innerHTML = appData.showcaseEvents.map(item => `
-    <article class="showcase-card">
+    <button type="button" class="showcase-card" onclick="openShowcaseCarousel('${inlineId(item.id)}')" aria-label="Ver fotos de ${escapeHtml(item.title)}">
       ${showcasePhotosMarkup(item)}
       <div class="showcase-body">
         <h3>${escapeHtml(item.title)}</h3>
         <p>${escapeHtml(item.desc)}</p>
+        <div class="showcase-open-hint">Ver fotos</div>
       </div>
-    </article>
+    </button>
   `).join('');
+}
+
+function getActiveShowcaseItem() {
+  return appData.showcaseEvents.find(item => sameId(item.id, activeShowcaseCarouselId));
+}
+
+function renderShowcaseCarousel() {
+  const item = getActiveShowcaseItem();
+  const title = document.getElementById('showcase-carousel-title');
+  const desc = document.getElementById('showcase-carousel-desc');
+  const counter = document.getElementById('showcase-carousel-counter');
+  const image = document.getElementById('showcase-carousel-image');
+  const empty = document.getElementById('showcase-carousel-empty');
+  const prev = document.querySelector('#showcase-carousel-modal .carousel-prev');
+  const next = document.querySelector('#showcase-carousel-modal .carousel-next');
+  if (!item || !title || !desc || !counter || !image || !empty || !prev || !next) return;
+
+  const photos = item.photoUrls || [];
+  activeShowcasePhotoIndex = Math.max(0, Math.min(activeShowcasePhotoIndex, photos.length - 1));
+  title.textContent = item.title || 'Evento';
+  desc.textContent = item.desc || '';
+
+  if (!photos.length) {
+    image.style.display = 'none';
+    image.removeAttribute('src');
+    empty.style.display = 'flex';
+    counter.textContent = 'Sem fotos cadastradas';
+    prev.disabled = true;
+    next.disabled = true;
+    return;
+  }
+
+  image.style.display = 'block';
+  image.src = photos[activeShowcasePhotoIndex];
+  image.alt = `Foto ${activeShowcasePhotoIndex + 1} de ${item.title}`;
+  empty.style.display = 'none';
+  counter.textContent = `Foto ${activeShowcasePhotoIndex + 1} de ${photos.length}`;
+  prev.disabled = photos.length <= 1;
+  next.disabled = photos.length <= 1;
+}
+
+function openShowcaseCarousel(id) {
+  const item = appData.showcaseEvents.find(x => sameId(x.id, id));
+  if (!item) return;
+  activeShowcaseCarouselId = item.id;
+  activeShowcasePhotoIndex = 0;
+  renderShowcaseCarousel();
+  document.getElementById('showcase-carousel-modal').classList.add('open');
+}
+
+function closeShowcaseCarousel(event) {
+  if (event && event.target !== event.currentTarget) return;
+  document.getElementById('showcase-carousel-modal').classList.remove('open');
+  activeShowcaseCarouselId = null;
+  activeShowcasePhotoIndex = 0;
+}
+
+function changeShowcasePhoto(direction) {
+  const item = getActiveShowcaseItem();
+  const photos = item?.photoUrls || [];
+  if (photos.length <= 1) return;
+  activeShowcasePhotoIndex = (activeShowcasePhotoIndex + direction + photos.length) % photos.length;
+  renderShowcaseCarousel();
 }
 
 function renderOfficials() {
@@ -1709,19 +1893,22 @@ function renderSponsors() {
     g.innerHTML = '<div class="empty-state">Nenhum patrocinador cadastrado ainda.</div>';
     return;
   }
-  g.innerHTML = appData.sponsors.map(s => `
-    <div class="sponsor-card">
-      ${s.logoUrl ? `
-        <button type="button" class="sponsor-logo sponsor-logo-button" data-preview-src="${escapeHtml(s.logoUrl)}" data-preview-alt="Logo de ${escapeHtml(s.name)}" onclick="openImagePreview(this.dataset.previewSrc, this.dataset.previewAlt)" aria-label="Ampliar logo de ${escapeHtml(s.name)}" title="Ampliar logo">
-          <img class="sponsor-logo-img" src="${escapeHtml(s.logoUrl)}" alt="Logo de ${escapeHtml(s.name)}" loading="lazy" onerror="this.remove()">
-        </button>
-      ` : `
-        <div class="sponsor-logo">${escapeHtml(s.emoji || '🤝')}</div>
-      `}
-      <div class="sponsor-name">${escapeHtml(s.name)}</div>
-      <div class="sponsor-type">${escapeHtml(s.type)}</div>
-    </div>
-  `).join('');
+  g.innerHTML = appData.sponsors.map(s => {
+    const logoUrl = sponsorDisplayLogoUrl(s);
+    return `
+      <div class="sponsor-card">
+        ${logoUrl ? `
+          <button type="button" class="sponsor-logo sponsor-logo-button" data-preview-src="${escapeHtml(logoUrl)}" data-preview-alt="Logo de ${escapeHtml(s.name)}" onclick="openImagePreview(this.dataset.previewSrc, this.dataset.previewAlt)" aria-label="Ampliar logo de ${escapeHtml(s.name)}" title="Ampliar logo">
+            <img class="sponsor-logo-img" src="${escapeHtml(logoUrl)}" alt="Logo de ${escapeHtml(s.name)}" loading="lazy" onerror="this.closest('button').style.display='none'">
+          </button>
+        ` : `
+          <div class="sponsor-logo">${escapeHtml(s.emoji || '🤝')}</div>
+        `}
+        <div class="sponsor-name">${escapeHtml(s.name)}</div>
+        <div class="sponsor-type">${escapeHtml(s.type)}</div>
+      </div>
+    `;
+  }).join('');
 }
 
 // ===== ADMIN RENDER =====
@@ -2244,7 +2431,7 @@ function normalizePhotoUrls(data) {
       : [data.photoUrl, data.imageUrl, data.image];
   return raw
     .filter(Boolean)
-    .map(url => String(url).trim())
+    .map(displayImageUrl)
     .filter(Boolean);
 }
 
@@ -2259,7 +2446,7 @@ function normalizeEvent(docId, data) {
     tag: normalizeCategoryId(data.tag ?? 'social'),
     local: data.local ?? 'São José do Rio Preto, SP',
     time: data.time ?? '',
-    imageUrl: data.imageUrl ?? data.photoUrl ?? data.image ?? ''
+    imageUrl: displayImageUrl(data.imageUrl ?? data.photoUrl ?? data.image ?? '')
   };
 }
 
@@ -2298,7 +2485,7 @@ function normalizeSponsor(docId, data) {
     name: data.name ?? '',
     type: data.type ?? 'Apoiador',
     emoji: data.emoji ?? '🤝',
-    logoUrl: data.logoUrl ?? data.imageUrl ?? ''
+    logoUrl: displayImageUrl(data.logoUrl ?? data.imageUrl ?? '')
   };
 }
 
@@ -2700,7 +2887,7 @@ function collectEventModalData() {
   const time = document.getElementById('event-time').value.trim() || '19:00';
   const local = document.getElementById('event-local').value.trim() || 'São José do Rio Preto, SP';
   const desc = document.getElementById('event-desc').value.trim();
-  const imageUrl = document.getElementById('event-image-url').value.trim();
+  const imageUrl = normalizeEnteredImageUrl(document.getElementById('event-image-url').value, 'A foto da atividade');
   if (!title) throw new Error('Informe o título da atividade.');
   if (Number.isNaN(day) || day < 1 || day > 31) throw new Error('Informe um dia válido entre 1 e 31.');
   if (!month) throw new Error('Informe o mês da atividade.');
@@ -2801,7 +2988,7 @@ function collectShowcaseModalData() {
   const desc = document.getElementById('showcase-desc').value.trim();
   const photoUrls = document.getElementById('showcase-photo-urls').value
     .split(/\r?\n/)
-    .map(url => url.trim())
+    .map(url => normalizeEnteredImageUrl(url, 'Cada foto do evento'))
     .filter(Boolean);
   if (!title) throw new Error('Informe o título do evento.');
   if (!desc) throw new Error('Informe uma breve descrição do evento.');
@@ -2991,7 +3178,7 @@ function collectSponsorModalData() {
   const name = document.getElementById('sponsor-name-field').value.trim();
   const type = document.getElementById('sponsor-type-field').value.trim() || 'Apoiador';
   const emoji = document.getElementById('sponsor-emoji-field').value.trim() || '🤝';
-  const logoUrl = document.getElementById('sponsor-logo-url-field').value.trim();
+  const logoUrl = normalizeEnteredImageUrl(document.getElementById('sponsor-logo-url-field').value, 'A logo do patrocinador');
   if (!name) throw new Error('Informe o nome do patrocinador.');
   return { name, type, emoji, logoUrl };
 }
@@ -3306,10 +3493,12 @@ Object.assign(window, {
   closeLogin,
   closeLogoPreview,
   closePasswordModal,
+  closeShowcaseCarousel,
   closeShowcaseModal,
   closeSponsorModal,
   createMember,
   createMemberFromMemberArea,
+  changeShowcasePhoto,
   deleteAdvisory,
   deleteCategory,
   deleteEvent,
@@ -3332,6 +3521,7 @@ Object.assign(window, {
   openLogoPreview,
   openPasswordModal,
   openSiteTab,
+  openShowcaseCarousel,
   selectCategory,
   submitForm,
   submitEventModal,
@@ -3349,8 +3539,11 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && document.getElementById('logo-preview').classList.contains('open')) closeLogoPreview();
   if (e.key === 'Escape' && document.getElementById('event-modal').classList.contains('open')) closeEventModal();
   if (e.key === 'Escape' && document.getElementById('password-modal').classList.contains('open')) closePasswordModal();
+  if (e.key === 'Escape' && document.getElementById('showcase-carousel-modal').classList.contains('open')) closeShowcaseCarousel();
   if (e.key === 'Escape' && document.getElementById('showcase-modal').classList.contains('open')) closeShowcaseModal();
   if (e.key === 'Escape' && document.getElementById('sponsor-modal').classList.contains('open')) closeSponsorModal();
+  if (document.getElementById('showcase-carousel-modal').classList.contains('open') && e.key === 'ArrowLeft') changeShowcasePhoto(-1);
+  if (document.getElementById('showcase-carousel-modal').classList.contains('open') && e.key === 'ArrowRight') changeShowcasePhoto(1);
   if (e.key === 'Enter' && document.getElementById('login-modal').classList.contains('open')) doLogin();
 });
 
