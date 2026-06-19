@@ -19,6 +19,86 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/members/$(request.auth.uid)).data.status == 'active';
     }
 
+    function isFixedOfficialRole(officialId, role) {
+      return (officialId == 'mestre-conselheiro' && role == 'Mestre Conselheiro')
+        || (officialId == 'primeiro-conselheiro' && role == '1º Conselheiro')
+        || (officialId == 'segundo-conselheiro' && role == '2º Conselheiro')
+        || (officialId == 'escrivao' && role == 'Escrivão')
+        || (officialId == 'tesoureiro' && role == 'Tesoureiro')
+        || (officialId == 'hospitaleiro' && role == 'Hospitaleiro')
+        || (officialId == 'primeiro-diacono' && role == '1º Diácono')
+        || (officialId == 'segundo-diacono' && role == '2º Diácono')
+        || (officialId == 'primeiro-mordomo' && role == '1º Mordomo')
+        || (officialId == 'segundo-mordomo' && role == '2º Mordomo')
+        || (officialId == 'orador' && role == 'Orador')
+        || (officialId == 'capelao' && role == 'Capelão')
+        || (officialId == 'mestre-de-cerimonias' && role == 'Mestre de Cerimônias')
+        || (officialId == 'porta-bandeira' && role == 'Porta-Bandeira')
+        || (officialId == 'sentinela' && role == 'Sentinela')
+        || (officialId == 'primeiro-preceptor' && role == '1º Preceptor')
+        || (officialId == 'segundo-preceptor' && role == '2º Preceptor')
+        || (officialId == 'terceiro-preceptor' && role == '3º Preceptor')
+        || (officialId == 'quarto-preceptor' && role == '4º Preceptor')
+        || (officialId == 'quinto-preceptor' && role == '5º Preceptor')
+        || (officialId == 'sexto-preceptor' && role == '6º Preceptor')
+        || (officialId == 'setimo-preceptor' && role == '7º Preceptor');
+    }
+
+    function hasOnlyOfficialFields() {
+      return request.resource.data.keys().hasOnly(['id', 'role', 'name', 'initials', 'createdAt', 'updatedAt']);
+    }
+
+    function canCreateFixedOfficial(officialId) {
+      return isActiveMember()
+        && request.resource.data.id == officialId
+        && isFixedOfficialRole(officialId, request.resource.data.role)
+        && hasOnlyOfficialFields()
+        && request.resource.data.name is string
+        && request.resource.data.initials is string;
+    }
+
+    function canUpdateFixedOfficialName(officialId) {
+      return isActiveMember()
+        && resource.data.id == officialId
+        && request.resource.data.id == officialId
+        && isFixedOfficialRole(officialId, resource.data.role)
+        && isFixedOfficialRole(officialId, request.resource.data.role)
+        && hasOnlyOfficialFields()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'initials', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.initials is string;
+    }
+
+    function isFixedAdvisoryRole(advisoryId, role) {
+      return (advisoryId == 'presidente-conselho-consultivo' && role == 'Presidente do Conselho Consultivo')
+        || (advisoryId == 'consultor' && role == 'Consultor');
+    }
+
+    function hasOnlyAdvisoryFields() {
+      return request.resource.data.keys().hasOnly(['id', 'role', 'name', 'initials', 'createdAt', 'updatedAt']);
+    }
+
+    function canCreateFixedAdvisory(advisoryId) {
+      return isActiveMember()
+        && request.resource.data.id == advisoryId
+        && isFixedAdvisoryRole(advisoryId, request.resource.data.role)
+        && hasOnlyAdvisoryFields()
+        && request.resource.data.name is string
+        && request.resource.data.initials is string;
+    }
+
+    function canUpdateFixedAdvisoryName(advisoryId) {
+      return isActiveMember()
+        && resource.data.id == advisoryId
+        && request.resource.data.id == advisoryId
+        && isFixedAdvisoryRole(advisoryId, resource.data.role)
+        && isFixedAdvisoryRole(advisoryId, request.resource.data.role)
+        && hasOnlyAdvisoryFields()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'initials', 'updatedAt'])
+        && request.resource.data.name is string
+        && request.resource.data.initials is string;
+    }
+
     match /members/{uid} {
       allow read: if signedIn()
         && (
@@ -31,31 +111,40 @@ service cloud.firestore {
 
     match /petitions/{petitionId} {
       allow create: if true;
-      allow read, update, delete: if isActiveAdmin();
+      allow read: if isActiveMember();
+      allow update, delete: if isActiveAdmin();
     }
 
     match /events/{eventId} {
       allow read: if true;
       allow create: if isActiveMember();
-      allow update, delete: if isActiveAdmin();
+      allow update, delete: if isActiveMember();
+    }
+
+    match /showcaseEvents/{showcaseEventId} {
+      allow read: if true;
+      allow create: if isActiveMember();
+      allow update, delete: if isActiveMember();
     }
 
     match /officials/{officialId} {
       allow read: if true;
-      allow create: if isActiveMember();
-      allow update, delete: if isActiveAdmin();
+      allow create: if canCreateFixedOfficial(officialId);
+      allow update: if canUpdateFixedOfficialName(officialId);
+      allow delete: if false;
     }
 
     match /advisory/{advisoryId} {
       allow read: if true;
-      allow create: if isActiveMember();
-      allow update, delete: if isActiveAdmin();
+      allow create: if canCreateFixedAdvisory(advisoryId);
+      allow update: if canUpdateFixedAdvisoryName(advisoryId);
+      allow delete: if false;
     }
 
     match /sponsors/{sponsorId} {
       allow read: if true;
       allow create: if isActiveMember();
-      allow update, delete: if isActiveAdmin();
+      allow update, delete: if isActiveMember();
     }
   }
 }

@@ -1,0 +1,26 @@
+127.0.0.1 - - [14/Jun/2026 15:49:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:50:54] "HEAD /assets/logo-demolay-sjrp.png HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:50:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:51:03] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:51:03] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:51:06] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:51:06] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:51:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:51:26] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:51:26] "GET /assets/logo-demolay-sjrp-nav.png HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:51:26] "GET /firebase-config.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:51:27] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:51:27] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:51:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:52:22] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:52:23] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:52:23] "GET /assets/logo-demolay-sjrp-nav.png HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:52:23] "GET /firebase-config.js HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 15:52:23] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:52:23] "GET /assets/logo-demolay-sjrp-nav.png HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:52:23] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:52:23] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:54:50] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:54:50] "GET /assets/logo-demolay-sjrp-nav.png HTTP/1.1" 404 -
+127.0.0.1 - - [14/Jun/2026 15:54:50] code 404, message File not found
+127.0.0.1 - - [14/Jun/2026 15:54:50] "GET /favicon.ico HTTP/1.1" 404 -

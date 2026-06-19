@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capítulo DeMolay São José do Rio Preto Nº34</title>
+<meta name="description" content="Capítulo DeMolay São José do Rio Preto Nº34, fundado em 1985.">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:title" content="Capítulo DeMolay São José do Rio Preto Nº34">
+<meta property="og:description" content="Formando líderes, construindo caráter e servindo à sociedade desde 1985.">
+<meta property="og:image" content="https://demolay-4957d.web.app/assets/logo-demolay-sjrp-nav.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://demolay-4957d.web.app">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.ico?v=1985" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png?v=1985">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=1985">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -73,8 +84,8 @@
     background: transparent;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Cinzel', serif; font-weight: 900; font-size: 14px;
-    color: var(--gold); border: 1px solid var(--gold);
-    flex-shrink: 0; overflow: visible; box-shadow: var(--shadow);
+    color: var(--gold); border: 0;
+    flex-shrink: 0; overflow: visible; box-shadow: none;
     padding: 0; cursor: pointer; appearance: none;
     transition: transform 0.2s, border-color 0.2s;
   }
@@ -82,7 +93,7 @@
   .nav-logo:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   .nav-logo img {
     width: 100%; height: 100%; object-fit: contain; object-position: center;
-    border-radius: 50%; padding: 2px; background: #fff; display: block;
+    border-radius: 50%; padding: 0; background: transparent; display: block;
   }
   .nav-title-wrap { display: flex; flex-direction: column; }
   .nav-cap { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
@@ -222,6 +233,11 @@
   .event-month { font-size: 10px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; margin-top: 2px; }
   .event-title { font-family: 'Cinzel', serif; font-size: 1rem; margin-bottom: 4px; }
   .event-desc { font-size: 13px; color: var(--muted); }
+  .event-image {
+    display: block; width: min(100%, 360px); aspect-ratio: 16 / 9;
+    object-fit: cover; border-radius: 6px; border: 1px solid var(--border);
+    margin-top: 0.75rem; background: var(--surface);
+  }
   .event-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
   .tag {
     display: inline-block; padding: 2px 10px; border-radius: 20px;
@@ -234,6 +250,38 @@
   .tag-formacao { background: rgba(100,149,237,0.15); color: #7ab3f5; border: 1px solid rgba(100,149,237,0.3); }
   .event-location { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
 
+  /* EVENTOS REALIZADOS */
+  .showcase-intro {
+    color: var(--muted); line-height: 1.75; font-size: 0.95rem;
+    max-width: 720px; margin-top: -1.5rem; margin-bottom: 2rem;
+  }
+  .showcase-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .showcase-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .showcase-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-2px); }
+  .showcase-photo-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px; padding: 4px; aspect-ratio: 16 / 10; background: var(--surface);
+  }
+  .showcase-photo-grid.single { grid-template-columns: 1fr; }
+  .showcase-photo-grid img {
+    width: 100%; height: 100%; min-height: 0; object-fit: cover;
+    border-radius: 4px; display: block;
+  }
+  .showcase-empty-photo {
+    aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center;
+    background: var(--surface); color: var(--muted); font-size: 13px;
+  }
+  .showcase-body { padding: 1.1rem; }
+  .showcase-body h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+  .showcase-body p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+
   .category-count { color: var(--gold); font-size: 11px; font-weight: 700; margin-top: 8px; text-transform: uppercase; }
   .empty-state {
     border: 1px dashed var(--border); border-radius: 8px; padding: 2rem;
@@ -241,7 +289,8 @@
   }
   .officials-grid .empty-state,
   .advisory-grid .empty-state,
-  .sponsors-grid .empty-state { grid-column: 1 / -1; }
+  .sponsors-grid .empty-state,
+  .showcase-grid .empty-state { grid-column: 1 / -1; }
   .firebase-status {
     display: none; border: 1px solid rgba(201,168,76,0.35); border-radius: 8px;
     padding: 0.85rem 1rem; margin-bottom: 1rem; color: var(--gold);
@@ -300,8 +349,15 @@
   .sponsor-logo {
     width: 60px; height: 60px; border-radius: 8px;
     background: var(--surface); display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.5rem; overflow: hidden;
   }
+  .sponsor-logo-button {
+    border: 0; padding: 0; cursor: zoom-in; appearance: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .sponsor-logo-button:hover { transform: scale(1.04); box-shadow: 0 0 0 1px rgba(201,168,76,0.35); }
+  .sponsor-logo-button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .sponsor-logo-img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
   .sponsor-name { font-size: 13px; font-weight: 500; text-align: center; }
   .sponsor-type { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
 
@@ -344,10 +400,17 @@
   .btn-download:hover { background: rgba(201,168,76,0.1); }
   .form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; }
   .form-actions .btn-primary { flex: 1; text-align: center; border: none; }
+  .form-actions .btn-primary:disabled { opacity: 0.65; cursor: wait; transform: none; }
   .success-msg {
     display: none; background: rgba(46,213,115,0.1); border: 1px solid rgba(46,213,115,0.3);
     border-radius: 8px; padding: 1rem 1.25rem; color: #4ddb8a; font-size: 14px; margin-top: 1rem;
   }
+  .success-msg a {
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-top: 0.85rem; color: var(--gold); border: 1px solid rgba(201,168,76,0.45);
+    border-radius: 4px; padding: 8px 14px; text-decoration: none; font-weight: 600;
+  }
+  .success-msg a:hover { background: rgba(201,168,76,0.1); }
 
   /* LOGIN MODAL */
   .modal-overlay {
@@ -361,6 +424,12 @@
     border-radius: 8px; padding: 2.5rem; width: 100%; max-width: 420px;
     margin: 1rem;
   }
+  .modal-wide { max-width: 720px; max-height: calc(100vh - 2rem); overflow-y: auto; }
+  .modal-error {
+    display: none; color: #e87070; font-size: 12px; text-align: center;
+    border: 1px solid rgba(192,57,43,0.35); border-radius: 6px;
+    padding: 0.75rem; background: rgba(192,57,43,0.08); margin-top: 1rem;
+  }
   .logo-preview-overlay {
     display: none; position: fixed; inset: 0; z-index: 230;
     background: rgba(0,0,0,0.88); backdrop-filter: blur(5px);
@@ -373,7 +442,7 @@
   }
   .logo-preview-inner img {
     width: auto; height: auto; max-width: 100%; max-height: 82vh; object-fit: contain;
-    border-radius: 50%; background: #fff; padding: clamp(8px, 1.4vw, 16px);
+    border-radius: 50%; background: transparent; padding: 0;
     box-shadow: 0 28px 80px rgba(0,0,0,0.55);
   }
   .logo-preview-close {
@@ -384,6 +453,15 @@
     display: flex; align-items: center; justify-content: center;
   }
   .logo-preview-close:hover { border-color: var(--gold); color: var(--gold); }
+  .logo-preview-download {
+    position: absolute; left: 50%; bottom: -54px; transform: translateX(-50%);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 1px solid rgba(201,168,76,0.5); border-radius: 6px;
+    background: var(--dark); color: var(--gold); text-decoration: none;
+    padding: 10px 16px; font-size: 13px; font-weight: 600;
+    box-shadow: var(--shadow); white-space: nowrap;
+  }
+  .logo-preview-download:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
   .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
   .modal-title { font-family: 'Cinzel', serif; font-size: 1.2rem; }
   .modal-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.4rem; padding: 4px; }
@@ -429,6 +507,23 @@
     transition: border-color 0.2s, color 0.2s, background 0.2s;
   }
   .member-action-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .member-officials-card { grid-column: 1 / -1; }
+  .member-officials-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem; }
+  .member-official-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    border: 1px solid var(--border); border-radius: 6px; background: var(--surface); padding: 0.75rem;
+  }
+  .member-official-row strong { display: block; color: var(--text); font-size: 13px; line-height: 1.3; }
+  .member-official-row span { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .member-wide-card { grid-column: 1 / -1; }
+  .member-manage-list { display: grid; gap: 0.75rem; }
+  .member-manage-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+    border: 1px solid var(--border); border-radius: 6px; background: var(--surface); padding: 0.75rem;
+  }
+  .member-manage-row strong { display: block; color: var(--text); font-size: 13px; line-height: 1.35; }
+  .member-manage-row span { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.4; }
+  .member-manage-row .admin-actions { flex-shrink: 0; }
 
   /* ADMIN PANEL */
   #admin-panel {
@@ -479,10 +574,35 @@
   .submissions-table th { color: var(--muted); font-weight: 500; text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 11px; letter-spacing: 0.5px; }
   .submissions-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
   .submissions-table tr:hover td { background: var(--surface); }
+  .submissions-table tr.active td { background: rgba(201,168,76,0.08); }
   .status-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 600; }
   .status-pending { background: rgba(201,168,76,0.15); color: var(--gold); }
   .status-approved { background: rgba(46,213,115,0.1); color: #4ddb8a; }
   .status-review { background: rgba(100,149,237,0.15); color: #7ab3f5; }
+  .petition-detail {
+    display: none; margin-top: 1rem; border: 1px solid var(--border);
+    border-radius: 8px; background: var(--surface); padding: 1.25rem;
+  }
+  .petition-detail.open { display: block; }
+  .petition-detail-header {
+    display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .petition-detail-title { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--text); }
+  .petition-detail-meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .petition-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+  .petition-field {
+    border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem;
+    background: var(--card); min-width: 0;
+  }
+  .petition-field.full { grid-column: 1 / -1; }
+  .petition-field span {
+    display: block; color: var(--muted); font-size: 11px; margin-bottom: 4px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .petition-field strong {
+    display: block; color: var(--text); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere;
+  }
 
   /* FOOTER */
   footer {
@@ -496,6 +616,14 @@
   .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; cursor: pointer; }
   .footer-links a:hover { color: var(--text); }
   .footer-contact p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .footer-instagram-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-top: 0.75rem; padding: 8px 14px; border-radius: 4px;
+    border: 1px solid rgba(201,168,76,0.45); color: var(--gold);
+    text-decoration: none; font-size: 12px; font-weight: 700;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .footer-instagram-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
   .footer-bottom { max-width: 1100px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
 
   /* RESPONSIVE */
@@ -508,6 +636,9 @@
     .event-card { grid-template-columns: 1fr; }
     .event-card > div:last-child { text-align: left; }
     .form-grid { grid-template-columns: 1fr; }
+    .petition-detail-header, .petition-detail-grid { grid-template-columns: 1fr; }
+    .petition-detail-header { display: grid; }
+    .petition-field.full { grid-column: auto; }
     .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
     .officials-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
     .admin-tabs { gap: 3px; }
@@ -545,6 +676,7 @@
     <a href="#inicio" data-page-target="hero" onclick="openSiteTab('hero', event)">Início</a>
     <a href="#sobre" data-page-target="about" onclick="openSiteTab('about', event)">Sobre</a>
     <a href="#calendario" data-page-target="calendar-section" onclick="openSiteTab('calendar-section', event)">Calendário</a>
+    <a href="#eventos" data-page-target="showcase-section" onclick="openSiteTab('showcase-section', event)">Eventos</a>
     <a href="#oficiais" data-page-target="officials-section" onclick="openSiteTab('officials-section', event)">Oficiais</a>
     <a href="#conselho" data-page-target="advisory-section" onclick="openSiteTab('advisory-section', event)">Conselho</a>
     <a href="#patrocinadores" data-page-target="sponsors-section" onclick="openSiteTab('sponsors-section', event)">Patrocinadores</a>
@@ -564,6 +696,7 @@
   <div class="logo-preview-inner">
     <button type="button" class="logo-preview-close" onclick="closeLogoPreview()" aria-label="Fechar">&times;</button>
     <img id="logo-preview-img" src="assets/logo-demolay-sjrp-nav.png" alt="Brasão do Capítulo DeMolay São José do Rio Preto Nº34 ampliado">
+    <a class="logo-preview-download" id="logo-preview-download" href="assets/logo-demolay-sjrp.png" download="logo-capitulo-demolay-sjrp-n34.png" onclick="event.stopPropagation()">Baixar logo</a>
   </div>
 </div>
 
@@ -572,7 +705,7 @@
   <div class="hero-bg"></div>
   <div class="hero-lines"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow">Ordem DeMolay • Desde 1982</div>
+    <div class="hero-eyebrow">Ordem DeMolay • Desde 1985</div>
     <h1>Capítulo DeMolay<br><span>São José do Rio Preto</span> Nº34</h1>
     <p class="hero-quote">
       "Para ser útil à sociedade, não é necessário ser um DeMolay, mas para ser um DeMolay,
@@ -595,13 +728,13 @@
   </div>
   <div class="about-grid">
     <div class="about-text">
-      <p>A Ordem DeMolay é uma organização internacional para jovens entre 12 e 21 anos, fundada em 1919 em Kansas City, Missouri. O Capítulo São José do Rio Preto Nº34 foi fundado em 1982 e é um dos mais ativos do estado de São Paulo.</p>
-      <p>Trabalhamos o desenvolvimento de líderes responsáveis, cidadãos comprometidos e homens de bem — através de sete virtudes fundamentais: Amor Filial, Reverência, Cortesia, Companheirismo, Pureza, Patriotismo e Fidelidade.</p>
+      <p>A Ordem DeMolay é uma organização internacional para jovens entre 12 e 21 anos, fundada em 1919 em Kansas City, Missouri. O Capítulo São José do Rio Preto Nº34 foi fundado em 1985 e é um dos mais ativos do estado de São Paulo.</p>
+      <p>Trabalhamos o desenvolvimento de líderes responsáveis, cidadãos comprometidos e homens de bem, através de sete virtudes fundamentais: Amor Filial, Reverência pelas coisas sagradas, Cortesia, Companheirismo, Fidelidade, Pureza e Patriotismo.</p>
       <p>Nossos membros participam de cerimônias rituais, projetos sociais, esportes, cultura e atividades de liderança que formam o caráter para a vida adulta.</p>
     </div>
     <div class="about-stats">
       <div class="stat-card">
-        <div class="stat-num">42</div>
+        <div class="stat-num" data-chapter-age>41</div>
         <div class="stat-label">Anos de história</div>
       </div>
       <div class="stat-card">
@@ -632,6 +765,20 @@
     <!-- populated by JS -->
   </div>
   <div class="calendar-grid" id="events-list">
+    <!-- populated by JS -->
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EVENTOS REALIZADOS -->
+<section id="showcase-section" class="site-page" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+  <div class="section-header">
+    <div class="section-tag">Eventos</div>
+    <h2>O que o Capítulo<br>realiza pela sociedade</h2>
+  </div>
+  <p class="showcase-intro">Ações, campanhas, encontros e projetos que mostram a presença do Capítulo São José do Rio Preto Nº34 na comunidade.</p>
+  <div class="showcase-grid" id="showcase-events-grid">
     <!-- populated by JS -->
   </div>
 </section>
@@ -688,13 +835,6 @@
     </p>
   </div>
   <div class="form-section">
-    <div class="form-download">
-      <div class="form-download-info">
-        <strong>📄 Formulário de Petição</strong>
-        Baixe o formulário oficial, preencha e envie junto com sua solicitação
-      </div>
-      <button class="btn-download" onclick="downloadForm()">⬇ Baixar PDF</button>
-    </div>
     <div class="form-grid" id="join-form">
       <div class="form-group">
         <label>Nome completo *</label>
@@ -734,10 +874,12 @@
       </div>
     </div>
     <div class="form-actions">
-      <button class="btn-primary" onclick="submitForm()">Enviar Petição →</button>
+      <button class="btn-primary" id="join-submit-button" onclick="submitForm()">Enviar Petição →</button>
     </div>
     <div class="success-msg" id="form-success">
-      ✅ Petição enviada com sucesso! Nossa equipe entrará em contato em breve. Bem-vindo à família DeMolay!
+      ✅ Dados enviados com sucesso! Agora envie o PDF da petição preenchida para o e-mail do capítulo.
+      <br>
+      <a href="mailto:capitulo34@demolay.org.br?subject=Petição%20DeMolay%20SJRP%20Nº34%20-%20PDF">Enviar PDF por e-mail</a>
     </div>
   </div>
 </section>
@@ -747,13 +889,14 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <div style="font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--text);">Capítulo DeMolay<br>São José do Rio Preto Nº34</div>
-      <p>Formando líderes, construindo caráter e servindo à sociedade desde 1982. Uma irmandade para a vida.</p>
+      <p>Formando líderes, construindo caráter e servindo à sociedade desde 1985. Uma irmandade para a vida.</p>
     </div>
     <div class="footer-links">
       <h4>Navegação</h4>
       <ul>
         <li><a href="#sobre" data-page-target="about" onclick="openSiteTab('about', event)">Sobre</a></li>
         <li><a href="#calendario" data-page-target="calendar-section" onclick="openSiteTab('calendar-section', event)">Calendário</a></li>
+        <li><a href="#eventos" data-page-target="showcase-section" onclick="openSiteTab('showcase-section', event)">Eventos</a></li>
         <li><a href="#oficiais" data-page-target="officials-section" onclick="openSiteTab('officials-section', event)">Oficiais</a></li>
         <li><a href="#conselho" data-page-target="advisory-section" onclick="openSiteTab('advisory-section', event)">Conselho</a></li>
         <li><a href="#patrocinadores" data-page-target="sponsors-section" onclick="openSiteTab('sponsors-section', event)">Patrocinadores</a></li>
@@ -765,10 +908,11 @@
       <p>
         📍 São José do Rio Preto, SP<br>
         📧 capitulo34@demolay.org.br<br>
-        📱 (17) 9 9999-0000<br><br>
-        🕐 Reuniões: Toda sexta-feira<br>
-        às 19h30 na sede
+        📸 Instagram: @demolayriopreto<br><br>
+        🕐 Reuniões: 1º, 3º e eventuais 5º sábados do mês<br>
+        às 15h na sede
       </p>
+      <a class="footer-instagram-btn" href="https://www.instagram.com/demolayriopreto/" target="_blank" rel="noopener">Abrir Instagram</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -801,11 +945,159 @@
   </div>
 </div>
 
+<!-- EVENT MODAL -->
+<div class="modal-overlay" id="event-modal">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h3 class="modal-title" id="event-modal-title">Cadastrar atividade</h3>
+      <button class="modal-close" onclick="closeEventModal()">×</button>
+    </div>
+    <div class="modal-form">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Título da atividade</label>
+          <input type="text" id="event-title" placeholder="Ex: Reunião ritualística">
+        </div>
+        <div class="form-group">
+          <label>Dia</label>
+          <input type="number" id="event-day" min="1" max="31" placeholder="12">
+        </div>
+        <div class="form-group">
+          <label>Mês</label>
+          <input type="text" id="event-month" placeholder="JUL">
+        </div>
+        <div class="form-group">
+          <label>Dia da semana</label>
+          <input type="text" id="event-weekday" placeholder="Sexta-feira">
+        </div>
+        <div class="form-group">
+          <label>Categoria</label>
+          <select id="event-category"></select>
+        </div>
+        <div class="form-group">
+          <label>Horário</label>
+          <input type="time" id="event-time" value="19:00">
+        </div>
+        <div class="form-group">
+          <label>Local</label>
+          <input type="text" id="event-local" placeholder="São José do Rio Preto, SP">
+        </div>
+        <div class="form-group full">
+          <label>Descrição</label>
+          <textarea id="event-desc" placeholder="Descreva brevemente a atividade"></textarea>
+        </div>
+        <div class="form-group full">
+          <label>Foto da atividade (URL)</label>
+          <input type="url" id="event-image-url" placeholder="https://...">
+        </div>
+      </div>
+      <div class="modal-error" id="event-modal-error"></div>
+      <div class="form-actions">
+        <button class="btn-download" type="button" onclick="closeEventModal()">Cancelar</button>
+        <button class="btn-primary" type="button" id="event-modal-save" onclick="submitEventModal()" style="border:none;">Salvar atividade</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPONSOR MODAL -->
+<div class="modal-overlay" id="sponsor-modal">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h3 class="modal-title" id="sponsor-modal-title">Cadastrar patrocinador</h3>
+      <button class="modal-close" onclick="closeSponsorModal()">×</button>
+    </div>
+    <div class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nome do patrocinador</label>
+          <input type="text" id="sponsor-name-field" placeholder="Nome da empresa ou apoiador">
+        </div>
+        <div class="form-group">
+          <label>Tipo</label>
+          <input type="text" id="sponsor-type-field" placeholder="Patrocinador Ouro / Apoiador">
+        </div>
+        <div class="form-group">
+          <label>Emoji reserva</label>
+          <input type="text" id="sponsor-emoji-field" placeholder="🤝">
+        </div>
+        <div class="form-group">
+          <label>Logo (URL)</label>
+          <input type="url" id="sponsor-logo-url-field" placeholder="https://...">
+        </div>
+      </div>
+      <div class="modal-error" id="sponsor-modal-error"></div>
+      <div class="form-actions">
+        <button class="btn-download" type="button" onclick="closeSponsorModal()">Cancelar</button>
+        <button class="btn-primary" type="button" id="sponsor-modal-save" onclick="submitSponsorModal()" style="border:none;">Salvar patrocinador</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHOWCASE EVENT MODAL -->
+<div class="modal-overlay" id="showcase-modal">
+  <div class="modal modal-wide">
+    <div class="modal-header">
+      <h3 class="modal-title" id="showcase-modal-title">Cadastrar evento realizado</h3>
+      <button class="modal-close" onclick="closeShowcaseModal()">×</button>
+    </div>
+    <div class="modal-form">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Título do evento</label>
+          <input type="text" id="showcase-title" placeholder="Ex: Campanha do agasalho">
+        </div>
+        <div class="form-group full">
+          <label>Breve descrição</label>
+          <textarea id="showcase-desc" placeholder="Conte em poucas linhas o que foi feito e o impacto da ação"></textarea>
+        </div>
+        <div class="form-group full">
+          <label>Fotos do evento (URLs, uma por linha)</label>
+          <textarea id="showcase-photo-urls" placeholder="https://exemplo.com/foto-1.jpg&#10;https://exemplo.com/foto-2.jpg"></textarea>
+        </div>
+      </div>
+      <div class="modal-error" id="showcase-modal-error"></div>
+      <div class="form-actions">
+        <button class="btn-download" type="button" onclick="closeShowcaseModal()">Cancelar</button>
+        <button class="btn-primary" type="button" id="showcase-modal-save" onclick="submitShowcaseModal()" style="border:none;">Salvar evento</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="modal-overlay" id="password-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Refazer senha</h3>
+      <button class="modal-close" onclick="closePasswordModal()">×</button>
+    </div>
+    <div class="modal-form">
+      <div class="form-group">
+        <label>Senha atual</label>
+        <input type="password" id="password-current" placeholder="Senha provisória ou atual">
+      </div>
+      <div class="form-group">
+        <label>Nova senha</label>
+        <input type="password" id="password-new" placeholder="mínimo 6 caracteres">
+      </div>
+      <div class="form-group">
+        <label>Confirmar nova senha</label>
+        <input type="password" id="password-confirm" placeholder="repita a nova senha">
+      </div>
+      <div class="modal-error" id="password-modal-error"></div>
+      <button class="btn-primary" type="button" id="password-modal-save" onclick="submitPasswordModal()" style="border:none;width:100%;text-align:center;">Salvar nova senha</button>
+    </div>
+  </div>
+</div>
+
 <!-- MEMBER PANEL -->
 <div id="member-panel">
   <div class="admin-nav">
     <span class="admin-nav-title">Área do DeMolay Ativo</span>
     <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+      <button class="btn-login" onclick="closeMemberArea()">Voltar</button>
       <button class="btn-login" id="member-admin-button" onclick="openAdmin()" style="display:none;">Painel administrativo</button>
       <button class="btn-login" onclick="logoutMember()">Sair</button>
     </div>
@@ -832,9 +1124,61 @@
         <h3>Cadastrar no site</h3>
         <div class="member-actions">
           <button class="member-action-btn" onclick="addEvent()">+ Atividade</button>
-          <button class="member-action-btn" onclick="addOfficial()">+ Oficial</button>
-          <button class="member-action-btn" onclick="addAdvisory()">+ Conselheiro</button>
+          <button class="member-action-btn" onclick="addShowcaseEvent()">+ Evento realizado</button>
           <button class="member-action-btn" onclick="addSponsor()">+ Patrocinador</button>
+        </div>
+      </div>
+      <div class="member-card member-wide-card" id="member-register-card" style="display:none;">
+        <h3>Cadastrar DeMolay ativo</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>ID DeMolay</label>
+            <input type="text" id="owner-member-id" placeholder="DM34-002">
+          </div>
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" id="owner-member-name" placeholder="Nome do membro">
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="owner-member-email" placeholder="membro@demolay.org.br">
+          </div>
+          <div class="form-group">
+            <label>Senha provisória</label>
+            <input type="password" id="owner-member-password" placeholder="mínimo 6 caracteres">
+          </div>
+        </div>
+        <button class="btn-add" style="margin-top:1rem;" onclick="createMemberFromMemberArea()">Salvar acesso</button>
+        <div class="success-msg" id="owner-member-create-success">DeMolay cadastrado com acesso à área.</div>
+      </div>
+      <div class="member-card member-wide-card">
+        <h3>Petições recebidas</h3>
+        <div class="member-manage-list" id="member-petitions-list"></div>
+      </div>
+      <div class="member-card member-wide-card">
+        <h3>Gerenciar calendário</h3>
+        <div class="member-manage-list" id="member-events-list"></div>
+      </div>
+      <div class="member-card member-wide-card">
+        <h3>Gerenciar eventos realizados</h3>
+        <div class="member-manage-list" id="member-showcase-events-list"></div>
+      </div>
+      <div class="member-card member-wide-card">
+        <h3>Gerenciar patrocinadores</h3>
+        <div class="member-manage-list" id="member-sponsors-list"></div>
+      </div>
+      <div class="member-card member-officials-card">
+        <h3>Nominata da gestão</h3>
+        <div class="member-officials-list" id="member-officials-list"></div>
+      </div>
+      <div class="member-card member-wide-card">
+        <h3>Conselho Consultivo</h3>
+        <div class="member-manage-list" id="member-advisory-list"></div>
+      </div>
+      <div class="member-card member-wide-card">
+        <h3>Senha de acesso</h3>
+        <div class="member-actions">
+          <button class="member-action-btn" onclick="openPasswordModal()">Refazer senha</button>
         </div>
       </div>
     </div>
@@ -871,6 +1215,7 @@
             <tbody id="submissions-body"></tbody>
           </table>
         </div>
+        <div class="petition-detail" id="petition-detail"></div>
       </div>
     </div>
 
@@ -885,16 +1230,14 @@
 
     <!-- OFICIAIS -->
     <div class="admin-section" id="tab-officials">
-      <button class="btn-add" onclick="addOfficial()">+ Novo Oficial</button>
       <div class="admin-card">
-        <h3>👑 Nominata Atual</h3>
+        <h3>👑 Nominata da gestão</h3>
         <div id="admin-officials-list"></div>
       </div>
     </div>
 
     <!-- CONSELHO -->
     <div class="admin-section" id="tab-advisory">
-      <button class="btn-add" onclick="addAdvisory()">+ Novo Conselheiro</button>
       <div class="admin-card">
         <h3>🏛 Conselho Consultivo</h3>
         <div id="admin-advisory-list"></div>
@@ -983,8 +1326,8 @@
             <input type="email" value="capitulo34@demolay.org.br">
           </div>
           <div class="form-group">
-            <label>Telefone</label>
-            <input type="tel" value="(17) 9 9999-0000">
+            <label>Instagram</label>
+            <input type="text" value="@demolayriopreto">
           </div>
           <div class="form-group">
             <label>Foto de perfil / brasão (URL)</label>
@@ -1014,16 +1357,47 @@
 <script src="firebase-config.js"></script>
 <script>
 // ===== DATA =====
+const fixedOfficialRoles = [
+  { id:'mestre-conselheiro', role:'Mestre Conselheiro' },
+  { id:'primeiro-conselheiro', role:'1º Conselheiro' },
+  { id:'segundo-conselheiro', role:'2º Conselheiro' },
+  { id:'escrivao', role:'Escrivão' },
+  { id:'tesoureiro', role:'Tesoureiro' },
+  { id:'hospitaleiro', role:'Hospitaleiro' },
+  { id:'primeiro-diacono', role:'1º Diácono' },
+  { id:'segundo-diacono', role:'2º Diácono' },
+  { id:'primeiro-mordomo', role:'1º Mordomo' },
+  { id:'segundo-mordomo', role:'2º Mordomo' },
+  { id:'orador', role:'Orador' },
+  { id:'capelao', role:'Capelão' },
+  { id:'mestre-de-cerimonias', role:'Mestre de Cerimônias' },
+  { id:'porta-bandeira', role:'Porta-Bandeira' },
+  { id:'sentinela', role:'Sentinela' },
+  { id:'primeiro-preceptor', role:'1º Preceptor' },
+  { id:'segundo-preceptor', role:'2º Preceptor' },
+  { id:'terceiro-preceptor', role:'3º Preceptor' },
+  { id:'quarto-preceptor', role:'4º Preceptor' },
+  { id:'quinto-preceptor', role:'5º Preceptor' },
+  { id:'sexto-preceptor', role:'6º Preceptor' },
+  { id:'setimo-preceptor', role:'7º Preceptor' }
+];
+
+const fixedAdvisoryRoles = [
+  { id:'presidente-conselho-consultivo', role:'Presidente do Conselho Consultivo' },
+  { id:'consultor', role:'Consultor' }
+];
+
 let appData = {
   events: [],
+  showcaseEvents: [],
   categories: [
-    { id:'ritual', label:'Ritual', desc:'Cerimônias, reuniões ritualísticas e trabalhos internos do Capítulo.', className:'tag-ritual' },
+    { id:'ritual', label:'Reunião', desc:'Reuniões, cerimônias e trabalhos internos do Capítulo.', className:'tag-ritual' },
     { id:'social', label:'Social', desc:'Confraternizações, integração entre membros e atividades abertas à família.', className:'tag-social' },
     { id:'filantropia', label:'Filantropia', desc:'Campanhas, arrecadações e ações de serviço à comunidade.', className:'tag-filantropia' },
     { id:'formacao', label:'Formação', desc:'Palestras, estudos, treinamentos e desenvolvimento de liderança.', className:'tag-formacao' },
   ],
-  officials: [],
-  advisory: [],
+  officials: fixedOfficialRoles.map(makeFixedOfficial),
+  advisory: fixedAdvisoryRoles.map(makeFixedAdvisory),
   sponsors: [],
   submissions: []
 };
@@ -1035,6 +1409,14 @@ let firebaseServices = null;
 let firebaseInitPromise = null;
 let firebaseConfigured = false;
 let demoMode = false;
+let petitionsUnsubscribe = null;
+let selectedSubmissionIndex = null;
+let eventModalMode = 'create';
+let editingEventId = null;
+let showcaseModalMode = 'create';
+let editingShowcaseId = null;
+let sponsorModalMode = 'create';
+let editingSponsorId = null;
 
 const demoMembers = [
   { uid:'demo-admin', memberId:'DM34-ADMIN', name:'Administrador DeMolay', email:'admin@demolay.org.br', role:'admin', status:'active', demoPassword:'demolay34' },
@@ -1062,6 +1444,31 @@ function inlineId(id) {
     .replace(/'/g, "\\'");
 }
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function calculateAge(birthValue) {
+  if (!birthValue) return null;
+  const birth = new Date(`${birthValue}T00:00:00`);
+  if (Number.isNaN(birth.getTime())) return null;
+  const today = new Date();
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) age -= 1;
+  return age;
+}
+
+function makeSubmissionId() {
+  if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+  return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
 function makeInitials(name) {
   return String(name || '')
     .trim()
@@ -1073,25 +1480,131 @@ function makeInitials(name) {
     .toUpperCase() || 'DM';
 }
 
+function normalizeRoleKey(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/º/g, 'o')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function makeFixedOfficial(slot, source = {}) {
+  const name = String(source.name || '').trim();
+  return {
+    id: slot.id,
+    role: slot.role,
+    name,
+    initials: name ? makeInitials(name) : 'DM'
+  };
+}
+
+function getFixedOfficialSlot(id) {
+  return fixedOfficialRoles.find(slot => sameId(slot.id, id));
+}
+
+function mergeFixedOfficials(officials) {
+  const byId = new Map();
+  const byRole = new Map();
+  officials.forEach(official => {
+    const id = String(official.id || '');
+    const roleKey = normalizeRoleKey(official.role);
+    if (id) byId.set(id, official);
+    if (roleKey && (!byRole.has(roleKey) || (!byRole.get(roleKey).name && official.name))) {
+      byRole.set(roleKey, official);
+    }
+  });
+  return fixedOfficialRoles.map(slot => makeFixedOfficial(
+    slot,
+    byId.get(slot.id) || byRole.get(normalizeRoleKey(slot.role))
+  ));
+}
+
+function officialDisplayName(official) {
+  return official.name ? official.name : 'A definir';
+}
+
+function makeFixedAdvisory(slot, source = {}) {
+  const name = String(source.name || '').trim();
+  return {
+    id: slot.id,
+    role: slot.role,
+    name,
+    initials: name ? makeInitials(name) : 'CC'
+  };
+}
+
+function getFixedAdvisorySlot(id) {
+  return fixedAdvisoryRoles.find(slot => sameId(slot.id, id));
+}
+
+function mergeFixedAdvisory(advisoryItems) {
+  const byId = new Map();
+  const byRole = new Map();
+  advisoryItems.forEach(advisory => {
+    const id = String(advisory.id || '');
+    const roleKey = normalizeRoleKey(advisory.role);
+    if (id) byId.set(id, advisory);
+    if (roleKey && (!byRole.has(roleKey) || (!byRole.get(roleKey).name && advisory.name))) {
+      byRole.set(roleKey, advisory);
+    }
+  });
+  return fixedAdvisoryRoles.map(slot => makeFixedAdvisory(
+    slot,
+    byId.get(slot.id) || byRole.get(normalizeRoleKey(slot.role))
+  ));
+}
+
+function advisoryDisplayName(advisory) {
+  return advisory.name ? advisory.name : 'A definir';
+}
+
+function categoryPromptLabel() {
+  return appData.categories.map(c => `${c.label} (${c.id})`).join(' / ');
+}
+
+function normalizeCategoryId(value, fallback = 'social') {
+  const raw = String(value || '').trim();
+  if (!raw) return fallback;
+  const key = normalizeRoleKey(raw);
+  const aliases = {
+    reuniao: 'ritual',
+    reunioes: 'ritual',
+    ritual: 'ritual',
+    ritualistica: 'ritual',
+    ritualisticas: 'ritual',
+    social: 'social',
+    filantropia: 'filantropia',
+    beneficencia: 'filantropia',
+    formacao: 'formacao'
+  };
+  const category = appData.categories.find(c =>
+    normalizeRoleKey(c.id) === key || normalizeRoleKey(c.label) === key
+  );
+  return category?.id || aliases[key] || fallback;
+}
+
 function eventCardMarkup(e) {
   const category = getCategory(e.tag);
   return `
     <div class="event-card">
       <div class="event-date-block">
-        <div class="event-day">${e.day}</div>
-        <div class="event-month">${e.month}</div>
+        <div class="event-day">${escapeHtml(e.day)}</div>
+        <div class="event-month">${escapeHtml(e.month)}</div>
       </div>
       <div>
         <div class="event-meta" style="margin-bottom:6px;">
-          <span class="tag ${category.className}">${category.label}</span>
-          <span style="font-size:12px;color:var(--muted);">${e.weekday}</span>
+          <span class="tag ${category.className}">${escapeHtml(category.label)}</span>
+          <span style="font-size:12px;color:var(--muted);">${escapeHtml(e.weekday)}</span>
         </div>
-        <h3 style="font-size:1rem;margin-bottom:4px;">${e.title}</h3>
-        <p style="font-size:13px;color:var(--muted);">${e.desc}</p>
+        <h3 style="font-size:1rem;margin-bottom:4px;">${escapeHtml(e.title)}</h3>
+        <p style="font-size:13px;color:var(--muted);">${escapeHtml(e.desc)}</p>
+        ${e.imageUrl ? `<img class="event-image" src="${escapeHtml(e.imageUrl)}" alt="Imagem de ${escapeHtml(e.title)}" loading="lazy" onerror="this.remove()">` : ''}
       </div>
       <div style="text-align:right;white-space:nowrap;">
-        <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);">${e.time}</div>
-        <div class="event-location">📍 ${e.local}</div>
+        <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);">${escapeHtml(e.time)}</div>
+        <div class="event-location">📍 ${escapeHtml(e.local)}</div>
       </div>
     </div>
   `;
@@ -1128,6 +1641,36 @@ function renderCalendarTabs() {
   `).join('');
 }
 
+function showcasePhotosMarkup(item) {
+  const photos = item.photoUrls.slice(0, 4);
+  if (!photos.length) return '<div class="showcase-empty-photo">Fotos em breve</div>';
+  return `
+    <div class="showcase-photo-grid ${photos.length === 1 ? 'single' : ''}">
+      ${photos.map((url, index) => `
+        <img src="${escapeHtml(url)}" alt="Foto ${index + 1} de ${escapeHtml(item.title)}" loading="lazy" onerror="this.remove()">
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderShowcaseEvents() {
+  const g = document.getElementById('showcase-events-grid');
+  if (!g) return;
+  if (!appData.showcaseEvents.length) {
+    g.innerHTML = '<div class="empty-state">Nenhum evento realizado cadastrado ainda.</div>';
+    return;
+  }
+  g.innerHTML = appData.showcaseEvents.map(item => `
+    <article class="showcase-card">
+      ${showcasePhotosMarkup(item)}
+      <div class="showcase-body">
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.desc)}</p>
+      </div>
+    </article>
+  `).join('');
+}
+
 function renderOfficials() {
   const g = document.getElementById('officials-grid');
   if (!appData.officials.length) {
@@ -1136,9 +1679,9 @@ function renderOfficials() {
   }
   g.innerHTML = appData.officials.map(o => `
     <div class="official-card">
-      <div class="official-avatar">${o.initials}</div>
-      <div class="official-role">${o.role}</div>
-      <div class="official-name">${o.name}</div>
+      <div class="official-avatar">${escapeHtml(o.initials)}</div>
+      <div class="official-role">${escapeHtml(o.role)}</div>
+      <div class="official-name">${escapeHtml(officialDisplayName(o))}</div>
     </div>
   `).join('');
 }
@@ -1151,10 +1694,10 @@ function renderAdvisory() {
   }
   g.innerHTML = appData.advisory.map(a => `
     <div class="advisory-card">
-      <div class="advisory-avatar">${a.initials}</div>
+      <div class="advisory-avatar">${escapeHtml(a.initials)}</div>
       <div class="advisory-info">
-        <h4>${a.name}</h4>
-        <p>${a.role}</p>
+        <h4>${escapeHtml(advisoryDisplayName(a))}</h4>
+        <p>${escapeHtml(a.role)}</p>
       </div>
     </div>
   `).join('');
@@ -1168,9 +1711,15 @@ function renderSponsors() {
   }
   g.innerHTML = appData.sponsors.map(s => `
     <div class="sponsor-card">
-      <div class="sponsor-logo">${s.emoji}</div>
-      <div class="sponsor-name">${s.name}</div>
-      <div class="sponsor-type">${s.type}</div>
+      ${s.logoUrl ? `
+        <button type="button" class="sponsor-logo sponsor-logo-button" data-preview-src="${escapeHtml(s.logoUrl)}" data-preview-alt="Logo de ${escapeHtml(s.name)}" onclick="openImagePreview(this.dataset.previewSrc, this.dataset.previewAlt)" aria-label="Ampliar logo de ${escapeHtml(s.name)}" title="Ampliar logo">
+          <img class="sponsor-logo-img" src="${escapeHtml(s.logoUrl)}" alt="Logo de ${escapeHtml(s.name)}" loading="lazy" onerror="this.remove()">
+        </button>
+      ` : `
+        <div class="sponsor-logo">${escapeHtml(s.emoji || '🤝')}</div>
+      `}
+      <div class="sponsor-name">${escapeHtml(s.name)}</div>
+      <div class="sponsor-type">${escapeHtml(s.type)}</div>
     </div>
   `).join('');
 }
@@ -1226,15 +1775,130 @@ function renderAdminOfficials() {
   list.innerHTML = appData.officials.map(o => `
     <div class="admin-row">
       <div>
-        <strong>${o.name}</strong>
-        <div style="font-size:12px;color:var(--muted);">${o.role}</div>
+        <strong>${escapeHtml(o.role)}</strong>
+        <div style="font-size:12px;color:var(--muted);">${escapeHtml(officialDisplayName(o))}</div>
       </div>
       <div class="admin-actions">
-        <button class="btn-sm btn-edit" onclick="editOfficial('${inlineId(o.id)}')">Editar</button>
-        <button class="btn-sm btn-del" onclick="deleteOfficial('${inlineId(o.id)}')">Excluir</button>
+        <button class="btn-sm btn-edit" onclick="editOfficial('${inlineId(o.id)}')">Editar nome</button>
       </div>
     </div>
   `).join('');
+}
+
+function renderMemberOfficials() {
+  const list = document.getElementById('member-officials-list');
+  if (!list) return;
+  list.innerHTML = appData.officials.map(o => `
+    <div class="member-official-row">
+      <div>
+        <strong>${escapeHtml(o.role)}</strong>
+        <span>${escapeHtml(officialDisplayName(o))}</span>
+      </div>
+      <button class="btn-sm btn-edit" onclick="editOfficial('${inlineId(o.id)}')">Editar</button>
+    </div>
+  `).join('');
+}
+
+function renderMemberEvents() {
+  const list = document.getElementById('member-events-list');
+  if (!list) return;
+  if (!appData.events.length) {
+    list.innerHTML = '<div class="empty-state">Nenhuma atividade cadastrada ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.events.map(e => `
+    <div class="member-manage-row">
+      <div>
+        <strong>${escapeHtml(e.day)} ${escapeHtml(e.month)} — ${escapeHtml(e.title)}</strong>
+        <span>${escapeHtml(getCategory(e.tag).label)} · ${escapeHtml(e.time)} · ${escapeHtml(e.local)}</span>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-sm btn-edit" onclick="editEvent('${inlineId(e.id)}')">Editar</button>
+        <button class="btn-sm btn-del" onclick="deleteEvent('${inlineId(e.id)}')">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMemberShowcaseEvents() {
+  const list = document.getElementById('member-showcase-events-list');
+  if (!list) return;
+  if (!appData.showcaseEvents.length) {
+    list.innerHTML = '<div class="empty-state">Nenhum evento realizado cadastrado ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.showcaseEvents.map(item => `
+    <div class="member-manage-row">
+      <div>
+        <strong>${escapeHtml(item.title)}</strong>
+        <span>${escapeHtml(item.desc || 'Sem descrição')} · ${item.photoUrls.length} foto${item.photoUrls.length === 1 ? '' : 's'}</span>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-sm btn-edit" onclick="editShowcaseEvent('${inlineId(item.id)}')">Editar</button>
+        <button class="btn-sm btn-del" onclick="deleteShowcaseEvent('${inlineId(item.id)}')">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMemberAdvisory() {
+  const list = document.getElementById('member-advisory-list');
+  if (!list) return;
+  list.innerHTML = appData.advisory.map(a => `
+    <div class="member-manage-row">
+      <div>
+        <strong>${escapeHtml(a.role)}</strong>
+        <span>${escapeHtml(advisoryDisplayName(a))}</span>
+      </div>
+      <button class="btn-sm btn-edit" onclick="editAdvisory('${inlineId(a.id)}')">Editar</button>
+    </div>
+  `).join('');
+}
+
+function renderMemberSponsors() {
+  const list = document.getElementById('member-sponsors-list');
+  if (!list) return;
+  if (!appData.sponsors.length) {
+    list.innerHTML = '<div class="empty-state">Nenhum patrocinador cadastrado ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.sponsors.map(s => `
+    <div class="member-manage-row">
+      <div>
+        <strong>${escapeHtml(s.emoji || '🤝')} ${escapeHtml(s.name)}</strong>
+        <span>${escapeHtml(s.type || 'Apoiador')}</span>
+      </div>
+      <div class="admin-actions">
+        <button class="btn-sm btn-edit" onclick="editSponsor('${inlineId(s.id)}')">Editar</button>
+        <button class="btn-sm btn-del" onclick="deleteSponsor('${inlineId(s.id)}')">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMemberPetitions() {
+  const list = document.getElementById('member-petitions-list');
+  if (!list) return;
+  if (!appData.submissions.length) {
+    list.innerHTML = '<div class="empty-state">Nenhuma petição recebida ainda.</div>';
+    return;
+  }
+  list.innerHTML = appData.submissions.map(s => {
+    const age = calculateAge(s.birth);
+    const statusClass = s.status === 'approved' ? 'status-approved' : (s.status === 'review' ? 'status-review' : 'status-pending');
+    const statusLabel = s.status === 'approved' ? 'Aprovada' : (s.status === 'review' ? 'Em análise' : 'Pendente');
+    return `
+      <div class="member-manage-row">
+        <div>
+          <strong>${escapeHtml(s.name || 'Petição sem nome')}</strong>
+          <span>${age === null ? 'Idade não informada' : `${age} anos`} · ${escapeHtml(s.email || 'E-mail não informado')} · ${escapeHtml(s.phone || 'Telefone não informado')}</span>
+          <span>Responsável: ${escapeHtml(s.guardian || '—')} · Como conheceu: ${escapeHtml(s.source || '—')}</span>
+          <span>Mensagem: ${escapeHtml(s.msg || '—')}</span>
+        </div>
+        <span class="status-badge ${statusClass}">${statusLabel}</span>
+      </div>
+    `;
+  }).join('');
 }
 
 function renderAdminAdvisory() {
@@ -1246,12 +1910,11 @@ function renderAdminAdvisory() {
   list.innerHTML = appData.advisory.map(a => `
     <div class="admin-row">
       <div>
-        <strong>${a.name}</strong>
-        <div style="font-size:12px;color:var(--muted);">${a.role}</div>
+        <strong>${escapeHtml(a.role)}</strong>
+        <div style="font-size:12px;color:var(--muted);">${escapeHtml(advisoryDisplayName(a))}</div>
       </div>
       <div class="admin-actions">
-        <button class="btn-sm btn-edit" onclick="editAdvisory('${inlineId(a.id)}')">Editar</button>
-        <button class="btn-sm btn-del" onclick="deleteAdvisory('${inlineId(a.id)}')">Excluir</button>
+        <button class="btn-sm btn-edit" onclick="editAdvisory('${inlineId(a.id)}')">Editar nome</button>
       </div>
     </div>
   `).join('');
@@ -1279,31 +1942,74 @@ function renderAdminSponsors() {
 
 function renderSubmissions() {
   const tbody = document.getElementById('submissions-body');
+  if (!tbody) return;
   if (appData.submissions.length === 0) {
+    selectedSubmissionIndex = null;
     tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:2rem;">Nenhuma petição recebida ainda</td></tr>';
+    renderSubmissionDetail();
     return;
   }
+  if (selectedSubmissionIndex !== null && !appData.submissions[selectedSubmissionIndex]) {
+    selectedSubmissionIndex = null;
+  }
   tbody.innerHTML = appData.submissions.map((s, i) => {
-    const birth = new Date(s.birth);
-    const age = new Date().getFullYear() - birth.getFullYear();
+    const age = calculateAge(s.birth);
     const statusClass = s.status === 'approved' ? 'status-approved' : (s.status === 'review' ? 'status-review' : 'status-pending');
     const statusLabel = s.status === 'approved' ? 'Aprovada' : (s.status === 'review' ? 'Em análise' : 'Pendente');
     return `
-    <tr>
-      <td>${s.name}</td>
-      <td>${isNaN(age) ? '—' : age} anos</td>
-      <td>${s.email}</td>
-      <td>${s.phone}</td>
-      <td>${s.source || '—'}</td>
+    <tr class="${selectedSubmissionIndex === i ? 'active' : ''}">
+      <td>${escapeHtml(s.name)}</td>
+      <td>${age === null ? '—' : age} anos</td>
+      <td>${escapeHtml(s.email)}</td>
+      <td>${escapeHtml(s.phone)}</td>
+      <td>${escapeHtml(s.source || '—')}</td>
       <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
       <td>
         <div class="admin-actions">
+          <button class="btn-sm btn-edit" onclick="viewSubmission(${i})">Ver dados</button>
           <button class="btn-sm btn-edit" onclick="approveSubmission(${i})">Aprovar</button>
           <button class="btn-sm btn-del" onclick="deleteSubmission(${i})">Excluir</button>
         </div>
       </td>
     </tr>`;
   }).join('');
+  renderSubmissionDetail();
+}
+
+function renderSubmissionDetail() {
+  const detail = document.getElementById('petition-detail');
+  if (!detail) return;
+  const s = selectedSubmissionIndex === null ? null : appData.submissions[selectedSubmissionIndex];
+  if (!s) {
+    detail.classList.remove('open');
+    detail.innerHTML = '';
+    return;
+  }
+  const age = calculateAge(s.birth);
+  detail.classList.add('open');
+  detail.innerHTML = `
+    <div class="petition-detail-header">
+      <div>
+        <div class="petition-detail-title">${escapeHtml(s.name || 'Petição sem nome')}</div>
+        <div class="petition-detail-meta">${escapeHtml(s.email || 'E-mail não informado')} · ${escapeHtml(s.phone || 'Telefone não informado')}</div>
+      </div>
+      <span class="status-badge ${s.status === 'approved' ? 'status-approved' : 'status-pending'}">${s.status === 'approved' ? 'Aprovada' : 'Pendente'}</span>
+    </div>
+    <div class="petition-detail-grid">
+      <div class="petition-field"><span>Nome completo</span><strong>${escapeHtml(s.name || '—')}</strong></div>
+      <div class="petition-field"><span>Data de nascimento</span><strong>${escapeHtml(s.birth || '—')}${age === null ? '' : ` · ${age} anos`}</strong></div>
+      <div class="petition-field"><span>E-mail</span><strong>${escapeHtml(s.email || '—')}</strong></div>
+      <div class="petition-field"><span>Telefone / WhatsApp</span><strong>${escapeHtml(s.phone || '—')}</strong></div>
+      <div class="petition-field"><span>Responsável</span><strong>${escapeHtml(s.guardian || '—')}</strong></div>
+      <div class="petition-field"><span>Como conheceu</span><strong>${escapeHtml(s.source || '—')}</strong></div>
+      <div class="petition-field full"><span>Mensagem</span><strong>${escapeHtml(s.msg || '—')}</strong></div>
+    </div>
+  `;
+}
+
+function viewSubmission(i) {
+  selectedSubmissionIndex = i;
+  renderSubmissions();
 }
 
 function renderMembersAdmin() {
@@ -1328,6 +2034,7 @@ const siteTabRoutes = {
   hero: 'inicio',
   about: 'sobre',
   'calendar-section': 'calendario',
+  'showcase-section': 'eventos',
   'officials-section': 'oficiais',
   'advisory-section': 'conselho',
   'sponsors-section': 'patrocinadores',
@@ -1374,14 +2081,38 @@ function initSiteTabs() {
   });
 }
 
-function openLogoPreview() {
+function openImagePreview(src, alt, downloadHref = '', downloadName = '') {
   const preview = document.getElementById('logo-preview');
   const previewImg = document.getElementById('logo-preview-img');
-  const navImg = document.querySelector('#nav-logo-wrap img');
-  if (!preview || !previewImg || !navImg) return;
-  previewImg.src = navImg.currentSrc || navImg.src;
+  const download = document.getElementById('logo-preview-download');
+  if (!preview || !previewImg || !src) return;
+  previewImg.src = src;
+  previewImg.alt = alt || 'Imagem ampliada';
+  if (download) {
+    if (downloadHref) {
+      download.href = downloadHref;
+      download.download = downloadName || '';
+      download.textContent = 'Baixar logo';
+      download.style.display = 'inline-flex';
+    } else {
+      download.removeAttribute('href');
+      download.removeAttribute('download');
+      download.style.display = 'none';
+    }
+  }
   preview.classList.add('open');
   preview.setAttribute('aria-hidden', 'false');
+}
+
+function openLogoPreview() {
+  const navImg = document.querySelector('#nav-logo-wrap img');
+  if (!navImg) return;
+  openImagePreview(
+    navImg.currentSrc || navImg.src,
+    'Brasão do Capítulo DeMolay São José do Rio Preto Nº34 ampliado',
+    'assets/logo-demolay-sjrp.png',
+    'logo-capitulo-demolay-sjrp-n34.png'
+  );
 }
 
 function closeLogoPreview(event) {
@@ -1468,6 +2199,10 @@ async function initFirebase() {
       secondaryAuth,
       signInWithEmailAndPassword: authMod.signInWithEmailAndPassword,
       createUserWithEmailAndPassword: authMod.createUserWithEmailAndPassword,
+      sendPasswordResetEmail: authMod.sendPasswordResetEmail,
+      EmailAuthProvider: authMod.EmailAuthProvider,
+      reauthenticateWithCredential: authMod.reauthenticateWithCredential,
+      updatePassword: authMod.updatePassword,
       signOut: authMod.signOut,
       onAuthStateChanged: authMod.onAuthStateChanged,
       collection: firestoreMod.collection,
@@ -1482,7 +2217,8 @@ async function initFirebase() {
       query: firestoreMod.query,
       orderBy: firestoreMod.orderBy,
       where: firestoreMod.where,
-      limit: firestoreMod.limit
+      limit: firestoreMod.limit,
+      onSnapshot: firestoreMod.onSnapshot
     };
 
     hideFirebaseStatus();
@@ -1500,6 +2236,18 @@ async function requireFirebase() {
   return services;
 }
 
+function normalizePhotoUrls(data) {
+  const raw = Array.isArray(data.photoUrls)
+    ? data.photoUrls
+    : Array.isArray(data.photos)
+      ? data.photos
+      : [data.photoUrl, data.imageUrl, data.image];
+  return raw
+    .filter(Boolean)
+    .map(url => String(url).trim())
+    .filter(Boolean);
+}
+
 function normalizeEvent(docId, data) {
   return {
     id: data.id ?? docId,
@@ -1508,9 +2256,19 @@ function normalizeEvent(docId, data) {
     weekday: data.weekday ?? '',
     title: data.title ?? '',
     desc: data.desc ?? '',
-    tag: data.tag ?? 'social',
+    tag: normalizeCategoryId(data.tag ?? 'social'),
     local: data.local ?? 'São José do Rio Preto, SP',
-    time: data.time ?? ''
+    time: data.time ?? '',
+    imageUrl: data.imageUrl ?? data.photoUrl ?? data.image ?? ''
+  };
+}
+
+function normalizeShowcaseEvent(docId, data) {
+  return {
+    id: data.id ?? docId,
+    title: data.title ?? data.name ?? '',
+    desc: data.desc ?? data.description ?? '',
+    photoUrls: normalizePhotoUrls(data)
   };
 }
 
@@ -1539,7 +2297,8 @@ function normalizeSponsor(docId, data) {
     id: data.id ?? docId,
     name: data.name ?? '',
     type: data.type ?? 'Apoiador',
-    emoji: data.emoji ?? '🤝'
+    emoji: data.emoji ?? '🤝',
+    logoUrl: data.logoUrl ?? data.imageUrl ?? ''
   };
 }
 
@@ -1552,24 +2311,36 @@ function sortByIdOrName(items) {
   });
 }
 
+function sortShowcaseEvents(items) {
+  return items.sort((a, b) => {
+    const numA = Number(a.id);
+    const numB = Number(b.id);
+    if (!Number.isNaN(numA) && !Number.isNaN(numB)) return numB - numA;
+    return String(a.title || '').localeCompare(String(b.title || ''), 'pt-BR');
+  });
+}
+
 async function loadManagedSiteData() {
   try {
     const fb = await initFirebase();
     if (!fb) return;
 
-    const [eventsSnapshot, officialsSnapshot, advisorySnapshot, sponsorsSnapshot] = await Promise.all([
+    const [eventsSnapshot, showcaseSnapshot, officialsSnapshot, advisorySnapshot, sponsorsSnapshot] = await Promise.all([
       fb.getDocs(fb.collection(fb.db, 'events')),
+      fb.getDocs(fb.collection(fb.db, 'showcaseEvents')),
       fb.getDocs(fb.collection(fb.db, 'officials')),
       fb.getDocs(fb.collection(fb.db, 'advisory')),
       fb.getDocs(fb.collection(fb.db, 'sponsors'))
     ]);
 
     appData.events = sortByIdOrName(eventsSnapshot.docs.map(docSnap => normalizeEvent(docSnap.id, docSnap.data())));
-    appData.officials = sortByIdOrName(officialsSnapshot.docs.map(docSnap => normalizeOfficial(docSnap.id, docSnap.data())));
-    appData.advisory = sortByIdOrName(advisorySnapshot.docs.map(docSnap => normalizeAdvisory(docSnap.id, docSnap.data())));
+    appData.showcaseEvents = sortShowcaseEvents(showcaseSnapshot.docs.map(docSnap => normalizeShowcaseEvent(docSnap.id, docSnap.data())));
+    appData.officials = mergeFixedOfficials(officialsSnapshot.docs.map(docSnap => normalizeOfficial(docSnap.id, docSnap.data())));
+    appData.advisory = mergeFixedAdvisory(advisorySnapshot.docs.map(docSnap => normalizeAdvisory(docSnap.id, docSnap.data())));
     appData.sponsors = sortByIdOrName(sponsorsSnapshot.docs.map(docSnap => normalizeSponsor(docSnap.id, docSnap.data())));
 
     renderEvents();
+    renderShowcaseEvents();
     renderOfficials();
     renderAdvisory();
     renderSponsors();
@@ -1678,6 +2449,7 @@ function renderMemberArea() {
   document.getElementById('member-panel-meta').textContent =
     `${currentMember.email} · ID ${currentMember.memberId || currentMember.registration || '—'} · ${currentMember.role === 'admin' ? 'Administrador' : 'Membro ativo'}`;
   document.getElementById('member-admin-button').style.display = currentMember.role === 'admin' ? 'inline-flex' : 'none';
+  document.getElementById('member-register-card').style.display = currentMember.role === 'admin' ? 'block' : 'none';
   document.getElementById('member-login-button').textContent = 'Minha área';
 
   const nextEvents = appData.events.slice(0, 4);
@@ -1691,6 +2463,12 @@ function renderMemberArea() {
     const count = appData.events.filter(e => e.tag === c.id).length;
     return `<span class="tag ${c.className}" style="width:max-content;">${c.label}: ${count}</span>`;
   }).join('');
+  renderMemberEvents();
+  renderMemberShowcaseEvents();
+  renderMemberSponsors();
+  renderMemberOfficials();
+  renderMemberAdvisory();
+  renderMemberPetitions();
 }
 
 function openMemberArea() {
@@ -1700,6 +2478,88 @@ function openMemberArea() {
   }
   renderMemberArea();
   document.getElementById('member-panel').classList.add('open');
+  loadPetitions();
+}
+
+function closeMemberArea() {
+  document.getElementById('member-panel').classList.remove('open');
+  document.getElementById('member-login-button').textContent = currentMember ? 'Minha área' : 'Área do DeMolay';
+}
+
+function setPasswordModalError(message = '') {
+  const error = document.getElementById('password-modal-error');
+  if (!error) return;
+  error.textContent = message;
+  error.style.display = message ? 'block' : 'none';
+}
+
+function clearPasswordFields() {
+  ['password-current', 'password-new', 'password-confirm'].forEach(id => {
+    const field = document.getElementById(id);
+    if (field) field.value = '';
+  });
+}
+
+function openPasswordModal() {
+  clearPasswordFields();
+  setPasswordModalError('');
+  document.getElementById('password-modal').classList.add('open');
+  setTimeout(() => document.getElementById('password-current')?.focus(), 0);
+}
+
+function closePasswordModal() {
+  document.getElementById('password-modal').classList.remove('open');
+  clearPasswordFields();
+  setPasswordModalError('');
+}
+
+function passwordErrorMessage(err) {
+  const code = err?.code || '';
+  if (code.includes('wrong-password') || code.includes('invalid-credential')) return 'A senha atual está incorreta.';
+  if (code.includes('weak-password')) return 'A nova senha precisa ter pelo menos 6 caracteres.';
+  if (code.includes('too-many-requests')) return 'Muitas tentativas. Aguarde um pouco e tente novamente.';
+  if (code.includes('requires-recent-login')) return 'Por segurança, saia e entre novamente antes de trocar a senha.';
+  return err?.message || 'Não foi possível atualizar a senha.';
+}
+
+async function submitPasswordModal() {
+  const currentPassword = document.getElementById('password-current').value;
+  const newPassword = document.getElementById('password-new').value;
+  const confirmPassword = document.getElementById('password-confirm').value;
+  const saveButton = document.getElementById('password-modal-save');
+  const originalText = saveButton.textContent;
+
+  if (!currentPassword || !newPassword || !confirmPassword) {
+    setPasswordModalError('Preencha todos os campos.');
+    return;
+  }
+  if (newPassword.length < 6) {
+    setPasswordModalError('A nova senha precisa ter pelo menos 6 caracteres.');
+    return;
+  }
+  if (newPassword !== confirmPassword) {
+    setPasswordModalError('A confirmação não confere com a nova senha.');
+    return;
+  }
+
+  try {
+    saveButton.disabled = true;
+    saveButton.textContent = 'Salvando...';
+    const fb = await requireFirebase();
+    const user = fb.auth.currentUser;
+    if (!user || !currentMember) throw new Error('Entre novamente para alterar sua senha.');
+    const email = user.email || currentMember.email;
+    const credential = fb.EmailAuthProvider.credential(email, currentPassword);
+    await fb.reauthenticateWithCredential(user, credential);
+    await fb.updatePassword(user, newPassword);
+    closePasswordModal();
+    alert('Senha atualizada com sucesso.');
+  } catch (err) {
+    setPasswordModalError(passwordErrorMessage(err));
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = originalText;
+  }
 }
 
 async function logoutMember() {
@@ -1707,7 +2567,12 @@ async function logoutMember() {
     const fb = await initFirebase();
     if (fb) await fb.signOut(fb.auth);
   } catch (_) {}
+  if (petitionsUnsubscribe) {
+    petitionsUnsubscribe();
+    petitionsUnsubscribe = null;
+  }
   currentMember = null;
+  selectedSubmissionIndex = null;
   document.getElementById('member-panel').classList.remove('open');
   document.getElementById('admin-panel').classList.remove('open');
   document.getElementById('member-login-button').textContent = 'Área do DeMolay';
@@ -1738,97 +2603,156 @@ function adminTab(name, trigger) {
 }
 
 async function submitForm() {
-  const name = document.getElementById('f-name').value;
+  const name = document.getElementById('f-name').value.trim();
   const birth = document.getElementById('f-birth').value;
-  const email = document.getElementById('f-email').value;
-  const phone = document.getElementById('f-phone').value;
+  const email = document.getElementById('f-email').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const submitButton = document.getElementById('join-submit-button');
   if (!name || !birth || !email || !phone) { alert('Por favor, preencha os campos obrigatórios (*)'); return; }
+  const submissionId = makeSubmissionId();
   const payload = {
     name, birth, email, phone,
-    guardian: document.getElementById('f-guardian').value,
+    guardian: document.getElementById('f-guardian').value.trim(),
     source: document.getElementById('f-source').value,
-    msg: document.getElementById('f-msg').value
+    msg: document.getElementById('f-msg').value.trim()
   };
   try {
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Enviando...';
+    }
     const fb = await initFirebase();
     if (fb) {
-      await fb.addDoc(fb.collection(fb.db, 'petitions'), {
+      await fb.setDoc(fb.doc(fb.db, 'petitions', submissionId), {
         ...payload,
         status: 'pending',
         createdAt: fb.serverTimestamp()
       });
     } else {
-      appData.submissions.push({ ...payload, status:'pending' });
+      appData.submissions.unshift({ id: submissionId, ...payload, status:'pending', createdAt: new Date().toISOString() });
     }
-  } catch (_) {
-    appData.submissions.push({ ...payload, status:'pending' });
+    document.getElementById('form-success').style.display = 'block';
+    document.querySelectorAll('#join-form input, #join-form select, #join-form textarea').forEach(el => el.value = '');
+    selectedSubmissionIndex = 0;
+    renderSubmissions();
+    renderMemberPetitions();
+  } catch (err) {
+    alert('Não foi possível enviar a petição. Confira a conexão e tente novamente. ' + (err.message || ''));
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Enviar Petição →';
+    }
   }
-  document.getElementById('form-success').style.display = 'block';
-  document.querySelectorAll('#join-form input, #join-form select, #join-form textarea').forEach(el => el.value = '');
-  renderSubmissions();
 }
 
-function downloadForm() {
-  // Creates a simple PDF-like form as text download
-  const content = `FORMULÁRIO DE PETIÇÃO - CAPÍTULO DEMOLAY SÃO JOSÉ DO RIO PRETO Nº34\n\n` +
-    `Nome completo: ___________________________________\n` +
-    `Data de nascimento: ___/___/______\n` +
-    `Endereço: ________________________________________\n` +
-    `CEP: ___________ Cidade: _________________ Estado: ___\n` +
-    `Telefone: (  ) ___________  WhatsApp: (  ) ___________\n` +
-    `E-mail: __________________________________________\n` +
-    `Nome do pai/responsável: _________________________\n` +
-    `Profissão do responsável: ________________________\n\n` +
-    `Declaro que desejo fazer parte da Ordem DeMolay e concordo em seguir seus preceitos.\n\n` +
-    `Assinatura: ______________________  Data: ___/___/______\n\n` +
-    `Assinatura do responsável: ______________________\n\n` +
-    `Envie este formulário preenchido para: capitulo34@demolay.org.br\n` +
-    `ou entregue pessoalmente nas nossas reuniões (toda sexta-feira às 19h30)`;
-  const blob = new Blob([content], {type:'text/plain'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = 'Peticao-DeMolay-SJRP-34.txt'; a.click();
+function fillEventCategorySelect(selectedValue = 'social') {
+  const select = document.getElementById('event-category');
+  if (!select) return;
+  select.innerHTML = appData.categories.map(c => `
+    <option value="${escapeHtml(c.id)}" ${c.id === selectedValue ? 'selected' : ''}>${escapeHtml(c.label)}</option>
+  `).join('');
+}
+
+function setEventModalError(message = '') {
+  const error = document.getElementById('event-modal-error');
+  if (!error) return;
+  error.textContent = message;
+  error.style.display = message ? 'block' : 'none';
+}
+
+function setEventField(id, value) {
+  const field = document.getElementById(id);
+  if (field) field.value = value ?? '';
+}
+
+function openEventModal(mode = 'create', eventItem = null) {
+  eventModalMode = mode;
+  editingEventId = eventItem?.id || null;
+  const categoryFallback = eventItem?.tag || (selectedEventCategory !== 'todos' ? selectedEventCategory : 'social');
+  fillEventCategorySelect(normalizeCategoryId(categoryFallback, 'social'));
+  document.getElementById('event-modal-title').textContent = mode === 'edit' ? 'Editar atividade' : 'Cadastrar atividade';
+  document.getElementById('event-modal-save').textContent = mode === 'edit' ? 'Salvar alterações' : 'Salvar atividade';
+  setEventField('event-title', eventItem?.title || '');
+  setEventField('event-day', eventItem?.day || '');
+  setEventField('event-month', eventItem?.month || '');
+  setEventField('event-weekday', eventItem?.weekday || 'Sexta-feira');
+  setEventField('event-time', eventItem?.time || '19:00');
+  setEventField('event-local', eventItem?.local || 'São José do Rio Preto, SP');
+  setEventField('event-desc', eventItem?.desc || '');
+  setEventField('event-image-url', eventItem?.imageUrl || '');
+  setEventModalError('');
+  document.getElementById('event-modal').classList.add('open');
+  setTimeout(() => document.getElementById('event-title')?.focus(), 0);
+}
+
+function closeEventModal() {
+  document.getElementById('event-modal').classList.remove('open');
+  setEventModalError('');
+}
+
+function collectEventModalData() {
+  const title = document.getElementById('event-title').value.trim();
+  const day = parseInt(document.getElementById('event-day').value, 10);
+  const month = document.getElementById('event-month').value.trim().toUpperCase();
+  const weekday = document.getElementById('event-weekday').value.trim() || 'Sexta-feira';
+  const tag = normalizeCategoryId(document.getElementById('event-category').value, 'social');
+  const time = document.getElementById('event-time').value.trim() || '19:00';
+  const local = document.getElementById('event-local').value.trim() || 'São José do Rio Preto, SP';
+  const desc = document.getElementById('event-desc').value.trim();
+  const imageUrl = document.getElementById('event-image-url').value.trim();
+  if (!title) throw new Error('Informe o título da atividade.');
+  if (Number.isNaN(day) || day < 1 || day > 31) throw new Error('Informe um dia válido entre 1 e 31.');
+  if (!month) throw new Error('Informe o mês da atividade.');
+  return { day, month, weekday, title, desc, tag, local, time, imageUrl };
+}
+
+async function submitEventModal() {
+  const saveButton = document.getElementById('event-modal-save');
+  const originalText = saveButton.textContent;
+  let before = null;
+  try {
+    saveButton.disabled = true;
+    saveButton.textContent = 'Salvando...';
+    const data = collectEventModalData();
+    if (eventModalMode === 'edit') {
+      const eventItem = appData.events.find(x => sameId(x.id, editingEventId));
+      if (!eventItem) throw new Error('Atividade não encontrada para edição.');
+      before = { ...eventItem };
+      Object.assign(eventItem, data);
+      await saveManagedRecord('events', eventItem);
+      selectedEventCategory = eventItem.tag;
+    } else {
+      const eventItem = { id: String(Date.now()), ...data };
+      await saveManagedRecord('events', eventItem, true);
+      appData.events.push(eventItem);
+      appData.events = sortByIdOrName(appData.events);
+      selectedEventCategory = eventItem.tag;
+    }
+    renderEvents(); renderAdminEvents(); renderAdminCategories();
+    if (currentMember) renderMemberArea();
+    closeEventModal();
+  } catch (err) {
+    if (before) {
+      const eventItem = appData.events.find(x => sameId(x.id, editingEventId));
+      if (eventItem) Object.assign(eventItem, before);
+    }
+    renderEvents(); renderAdminEvents(); renderAdminCategories();
+    if (currentMember) renderMemberArea();
+    setEventModalError(err.message || 'Não foi possível salvar a atividade.');
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = originalText;
+  }
 }
 
 // Admin CRUD helpers
-async function addEvent() {
-  const title = prompt('Título do evento:'); if (!title) return;
-  const day = parseInt(prompt('Dia:'), 10);
-  const month = prompt('Mês (ex: JUL):');
-  const desc = prompt('Descrição:') || '';
-  const tag = prompt(`Categoria (${appData.categories.map(c => c.id).join('/')}):`) || 'social';
-  const time = prompt('Horário (ex: 19:30):') || '19:00';
-  const local = prompt('Local:', 'São José do Rio Preto, SP') || 'São José do Rio Preto, SP';
-  const weekday = prompt('Dia da semana:', 'Sexta-feira') || 'Sexta-feira';
-  const event = { id: String(Date.now()), day, month, weekday, title, desc, tag, local, time };
-  try {
-    await saveManagedRecord('events', event, true);
-    appData.events.push(event);
-    appData.events = sortByIdOrName(appData.events);
-    renderEvents(); renderAdminEvents(); renderAdminCategories();
-  } catch (err) {
-    alert('Não foi possível salvar o evento no Firestore: ' + err.message);
-  }
+function addEvent() {
+  openEventModal('create');
 }
-async function editEvent(id) {
+function editEvent(id) {
   const e = appData.events.find(x => sameId(x.id, id)); if (!e) return;
-  const before = { ...e };
-  const t = prompt('Novo título:', e.title); if (t) e.title = t;
-  const day = parseInt(prompt('Dia:', e.day), 10); if (!Number.isNaN(day)) e.day = day;
-  const month = prompt('Mês:', e.month); if (month) e.month = month;
-  const weekday = prompt('Dia da semana:', e.weekday); if (weekday) e.weekday = weekday;
-  const d = prompt('Nova descrição:', e.desc); if (d) e.desc = d;
-  const tag = prompt(`Categoria (${appData.categories.map(c => c.id).join('/')}):`, e.tag); if (tag) e.tag = tag;
-  const time = prompt('Horário:', e.time); if (time) e.time = time;
-  const local = prompt('Local:', e.local); if (local) e.local = local;
-  try {
-    await saveManagedRecord('events', e);
-    renderEvents(); renderAdminEvents(); renderAdminCategories();
-    if (currentMember) renderMemberArea();
-  } catch (err) {
-    Object.assign(e, before);
-    renderEvents(); renderAdminEvents(); renderAdminCategories();
-    alert('Não foi possível atualizar o evento no Firestore: ' + err.message);
-  }
+  openEventModal('edit', e);
 }
 async function deleteEvent(id) {
   if (!confirm('Excluir evento?')) return;
@@ -1841,6 +2765,108 @@ async function deleteEvent(id) {
     alert('Não foi possível excluir o evento no Firestore: ' + err.message);
   }
 }
+
+function setShowcaseModalError(message = '') {
+  const error = document.getElementById('showcase-modal-error');
+  if (!error) return;
+  error.textContent = message;
+  error.style.display = message ? 'block' : 'none';
+}
+
+function setShowcaseField(id, value) {
+  const field = document.getElementById(id);
+  if (field) field.value = value ?? '';
+}
+
+function openShowcaseModal(mode = 'create', item = null) {
+  showcaseModalMode = mode;
+  editingShowcaseId = item?.id || null;
+  document.getElementById('showcase-modal-title').textContent = mode === 'edit' ? 'Editar evento realizado' : 'Cadastrar evento realizado';
+  document.getElementById('showcase-modal-save').textContent = mode === 'edit' ? 'Salvar alterações' : 'Salvar evento';
+  setShowcaseField('showcase-title', item?.title || '');
+  setShowcaseField('showcase-desc', item?.desc || '');
+  setShowcaseField('showcase-photo-urls', item?.photoUrls?.join('\n') || '');
+  setShowcaseModalError('');
+  document.getElementById('showcase-modal').classList.add('open');
+  setTimeout(() => document.getElementById('showcase-title')?.focus(), 0);
+}
+
+function closeShowcaseModal() {
+  document.getElementById('showcase-modal').classList.remove('open');
+  setShowcaseModalError('');
+}
+
+function collectShowcaseModalData() {
+  const title = document.getElementById('showcase-title').value.trim();
+  const desc = document.getElementById('showcase-desc').value.trim();
+  const photoUrls = document.getElementById('showcase-photo-urls').value
+    .split(/\r?\n/)
+    .map(url => url.trim())
+    .filter(Boolean);
+  if (!title) throw new Error('Informe o título do evento.');
+  if (!desc) throw new Error('Informe uma breve descrição do evento.');
+  return { title, desc, photoUrls, imageUrl: photoUrls[0] || '' };
+}
+
+function addShowcaseEvent() {
+  openShowcaseModal('create');
+}
+
+function editShowcaseEvent(id) {
+  const item = appData.showcaseEvents.find(x => sameId(x.id, id));
+  if (!item) return;
+  openShowcaseModal('edit', item);
+}
+
+async function submitShowcaseModal() {
+  const saveButton = document.getElementById('showcase-modal-save');
+  const originalText = saveButton.textContent;
+  let before = null;
+  try {
+    saveButton.disabled = true;
+    saveButton.textContent = 'Salvando...';
+    const data = collectShowcaseModalData();
+    if (showcaseModalMode === 'edit') {
+      const item = appData.showcaseEvents.find(x => sameId(x.id, editingShowcaseId));
+      if (!item) throw new Error('Evento realizado não encontrado para edição.');
+      before = { ...item, photoUrls: [...item.photoUrls] };
+      Object.assign(item, data);
+      await saveManagedRecord('showcaseEvents', item);
+    } else {
+      const item = { id: String(Date.now()), ...data };
+      await saveManagedRecord('showcaseEvents', item, true);
+      appData.showcaseEvents.push(item);
+      appData.showcaseEvents = sortShowcaseEvents(appData.showcaseEvents);
+    }
+    renderShowcaseEvents();
+    if (currentMember) renderMemberArea();
+    closeShowcaseModal();
+  } catch (err) {
+    if (before) {
+      const item = appData.showcaseEvents.find(x => sameId(x.id, editingShowcaseId));
+      if (item) Object.assign(item, before);
+    }
+    renderShowcaseEvents();
+    if (currentMember) renderMemberArea();
+    setShowcaseModalError(err.message || 'Não foi possível salvar o evento realizado.');
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = originalText;
+  }
+}
+
+async function deleteShowcaseEvent(id) {
+  if (!confirm('Excluir evento realizado?')) return;
+  try {
+    await deleteManagedRecord('showcaseEvents', id);
+    appData.showcaseEvents = appData.showcaseEvents.filter(x => !sameId(x.id, id));
+    renderShowcaseEvents();
+    if (currentMember) renderMemberArea();
+  } catch (err) {
+    alert('Não foi possível excluir o evento realizado no Firestore: ' + err.message);
+  }
+}
+
 function addCategory() {
   const id = (prompt('Identificador curto (ex: esporte):') || '').trim().toLowerCase().replace(/\s+/g, '-');
   if (!id) return;
@@ -1866,107 +2892,153 @@ function deleteCategory(id) {
   if (selectedEventCategory === id) selectedEventCategory = 'todos';
   renderEvents(); renderAdminCategories();
 }
-async function addOfficial() {
-  const role = prompt('Cargo:'); if (!role) return;
-  const name = prompt('Nome:'); if (!name) return;
-  const official = { id: String(Date.now()), role, name, initials: makeInitials(name) };
-  try {
-    await saveManagedRecord('officials', official, true);
-    appData.officials.push(official);
-    appData.officials = sortByIdOrName(appData.officials);
-    renderOfficials(); renderAdminOfficials();
-  } catch (err) {
-    alert('Não foi possível salvar o oficial no Firestore: ' + err.message);
-  }
+function addOfficial() {
+  alert('Os cargos da nominata já ficam fixos. Use "Editar" para atualizar o nome em cada cargo.');
 }
 async function editOfficial(id) {
-  const o = appData.officials.find(x => sameId(x.id, id)); if (!o) return;
+  const slot = getFixedOfficialSlot(id); if (!slot) return;
+  let o = appData.officials.find(x => sameId(x.id, id));
+  if (!o) {
+    o = makeFixedOfficial(slot);
+    appData.officials = mergeFixedOfficials([...appData.officials, o]);
+  }
   const before = { ...o };
-  const n = prompt('Novo nome:', o.name); if (n) { o.name = n; o.initials = makeInitials(n); }
-  const r = prompt('Novo cargo:', o.role); if (r) o.role = r;
+  const n = prompt(`Nome para ${slot.role}:`, o.name || '');
+  if (n === null) return;
+  o.id = slot.id;
+  o.role = slot.role;
+  o.name = n.trim();
+  o.initials = makeInitials(o.name);
   try {
     await saveManagedRecord('officials', o);
+    appData.officials = mergeFixedOfficials(appData.officials);
     renderOfficials(); renderAdminOfficials();
+    if (currentMember) renderMemberArea();
   } catch (err) {
     Object.assign(o, before);
     renderOfficials(); renderAdminOfficials();
+    if (currentMember) renderMemberArea();
     alert('Não foi possível atualizar o oficial no Firestore: ' + err.message);
   }
 }
-async function deleteOfficial(id) {
-  if (!confirm('Excluir oficial?')) return;
-  try {
-    await deleteManagedRecord('officials', id);
-    appData.officials = appData.officials.filter(x => !sameId(x.id, id));
-    renderOfficials(); renderAdminOfficials();
-  } catch (err) {
-    alert('Não foi possível excluir o oficial no Firestore: ' + err.message);
-  }
+function deleteOfficial() {
+  alert('Os cargos da nominata são fixos e não podem ser excluídos.');
 }
-async function addAdvisory() {
-  const name = prompt('Nome do conselheiro:'); if (!name) return;
-  const role = prompt('Cargo/função:') || 'Conselheiro';
-  const advisory = { id: String(Date.now()), name, role, initials: makeInitials(name) };
-  try {
-    await saveManagedRecord('advisory', advisory, true);
-    appData.advisory.push(advisory);
-    appData.advisory = sortByIdOrName(appData.advisory);
-    renderAdvisory(); renderAdminAdvisory();
-  } catch (err) {
-    alert('Não foi possível salvar o conselheiro no Firestore: ' + err.message);
-  }
+function addAdvisory() {
+  alert('Os cargos do Conselho Consultivo já ficam fixos. Use "Editar" para atualizar o nome em cada cargo.');
 }
 async function editAdvisory(id) {
-  const a = appData.advisory.find(x => sameId(x.id, id)); if (!a) return;
+  const slot = getFixedAdvisorySlot(id); if (!slot) return;
+  let a = appData.advisory.find(x => sameId(x.id, id));
+  if (!a) {
+    a = makeFixedAdvisory(slot);
+    appData.advisory = mergeFixedAdvisory([...appData.advisory, a]);
+  }
   const before = { ...a };
-  const n = prompt('Novo nome:', a.name); if (n) { a.name = n; a.initials = makeInitials(n); }
-  const r = prompt('Novo cargo:', a.role); if (r) a.role = r;
+  const n = prompt(`Nome para ${slot.role}:`, a.name || '');
+  if (n === null) return;
+  a.id = slot.id;
+  a.role = slot.role;
+  a.name = n.trim();
+  a.initials = makeInitials(a.name);
   try {
     await saveManagedRecord('advisory', a);
+    appData.advisory = mergeFixedAdvisory(appData.advisory);
     renderAdvisory(); renderAdminAdvisory();
+    if (currentMember) renderMemberArea();
   } catch (err) {
     Object.assign(a, before);
     renderAdvisory(); renderAdminAdvisory();
+    if (currentMember) renderMemberArea();
     alert('Não foi possível atualizar o conselheiro no Firestore: ' + err.message);
   }
 }
-async function deleteAdvisory(id) {
-  if (!confirm('Excluir conselheiro?')) return;
-  try {
-    await deleteManagedRecord('advisory', id);
-    appData.advisory = appData.advisory.filter(x => !sameId(x.id, id));
-    renderAdvisory(); renderAdminAdvisory();
-  } catch (err) {
-    alert('Não foi possível excluir o conselheiro no Firestore: ' + err.message);
-  }
+function deleteAdvisory() {
+  alert('Os cargos do Conselho Consultivo são fixos e não podem ser excluídos.');
 }
-async function addSponsor() {
-  const name = prompt('Nome do patrocinador:'); if (!name) return;
-  const type = prompt('Tipo (Patrocinador Ouro / Prata / Apoiador):') || 'Apoiador';
-  const emoji = prompt('Emoji representativo (ex: 🏢):') || '🤝';
-  const sponsor = { id: String(Date.now()), name, type, emoji };
-  try {
-    await saveManagedRecord('sponsors', sponsor, true);
-    appData.sponsors.push(sponsor);
-    appData.sponsors = sortByIdOrName(appData.sponsors);
-    renderSponsors(); renderAdminSponsors();
-  } catch (err) {
-    alert('Não foi possível salvar o patrocinador no Firestore: ' + err.message);
-  }
+function setSponsorModalError(message = '') {
+  const error = document.getElementById('sponsor-modal-error');
+  if (!error) return;
+  error.textContent = message;
+  error.style.display = message ? 'block' : 'none';
 }
-async function editSponsor(id) {
-  const s = appData.sponsors.find(x => sameId(x.id, id)); if (!s) return;
-  const before = { ...s };
-  const n = prompt('Novo nome:', s.name); if (n) s.name = n;
-  const t = prompt('Novo tipo:', s.type); if (t) s.type = t;
-  const emoji = prompt('Emoji representativo:', s.emoji); if (emoji) s.emoji = emoji;
+
+function setSponsorField(id, value) {
+  const field = document.getElementById(id);
+  if (field) field.value = value ?? '';
+}
+
+function openSponsorModal(mode = 'create', sponsor = null) {
+  sponsorModalMode = mode;
+  editingSponsorId = sponsor?.id || null;
+  document.getElementById('sponsor-modal-title').textContent = mode === 'edit' ? 'Editar patrocinador' : 'Cadastrar patrocinador';
+  document.getElementById('sponsor-modal-save').textContent = mode === 'edit' ? 'Salvar alterações' : 'Salvar patrocinador';
+  setSponsorField('sponsor-name-field', sponsor?.name || '');
+  setSponsorField('sponsor-type-field', sponsor?.type || 'Apoiador');
+  setSponsorField('sponsor-emoji-field', sponsor?.emoji || '🤝');
+  setSponsorField('sponsor-logo-url-field', sponsor?.logoUrl || '');
+  setSponsorModalError('');
+  document.getElementById('sponsor-modal').classList.add('open');
+  setTimeout(() => document.getElementById('sponsor-name-field')?.focus(), 0);
+}
+
+function closeSponsorModal() {
+  document.getElementById('sponsor-modal').classList.remove('open');
+  setSponsorModalError('');
+}
+
+function collectSponsorModalData() {
+  const name = document.getElementById('sponsor-name-field').value.trim();
+  const type = document.getElementById('sponsor-type-field').value.trim() || 'Apoiador';
+  const emoji = document.getElementById('sponsor-emoji-field').value.trim() || '🤝';
+  const logoUrl = document.getElementById('sponsor-logo-url-field').value.trim();
+  if (!name) throw new Error('Informe o nome do patrocinador.');
+  return { name, type, emoji, logoUrl };
+}
+
+function addSponsor() {
+  openSponsorModal('create');
+}
+
+function editSponsor(id) {
+  const sponsor = appData.sponsors.find(x => sameId(x.id, id)); if (!sponsor) return;
+  openSponsorModal('edit', sponsor);
+}
+
+async function submitSponsorModal() {
+  const saveButton = document.getElementById('sponsor-modal-save');
+  const originalText = saveButton.textContent;
+  let before = null;
   try {
-    await saveManagedRecord('sponsors', s);
+    saveButton.disabled = true;
+    saveButton.textContent = 'Salvando...';
+    const data = collectSponsorModalData();
+    if (sponsorModalMode === 'edit') {
+      const sponsor = appData.sponsors.find(x => sameId(x.id, editingSponsorId));
+      if (!sponsor) throw new Error('Patrocinador não encontrado para edição.');
+      before = { ...sponsor };
+      Object.assign(sponsor, data);
+      await saveManagedRecord('sponsors', sponsor);
+    } else {
+      const sponsor = { id: String(Date.now()), ...data };
+      await saveManagedRecord('sponsors', sponsor, true);
+      appData.sponsors.push(sponsor);
+      appData.sponsors = sortByIdOrName(appData.sponsors);
+    }
     renderSponsors(); renderAdminSponsors();
+    if (currentMember) renderMemberArea();
+    closeSponsorModal();
   } catch (err) {
-    Object.assign(s, before);
+    if (before) {
+      const sponsor = appData.sponsors.find(x => sameId(x.id, editingSponsorId));
+      if (sponsor) Object.assign(sponsor, before);
+    }
     renderSponsors(); renderAdminSponsors();
-    alert('Não foi possível atualizar o patrocinador no Firestore: ' + err.message);
+    if (currentMember) renderMemberArea();
+    setSponsorModalError(err.message || 'Não foi possível salvar o patrocinador.');
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = originalText;
   }
 }
 async function deleteSponsor(id) {
@@ -1975,6 +3047,7 @@ async function deleteSponsor(id) {
     await deleteManagedRecord('sponsors', id);
     appData.sponsors = appData.sponsors.filter(x => !sameId(x.id, id));
     renderSponsors(); renderAdminSponsors();
+    if (currentMember) renderMemberArea();
   } catch (err) {
     alert('Não foi possível excluir o patrocinador no Firestore: ' + err.message);
   }
@@ -1992,6 +3065,7 @@ async function approveSubmission(i) {
   }
   alert('Petição aprovada.');
   renderSubmissions();
+  renderMemberPetitions();
 }
 async function deleteSubmission(i) {
   if (!confirm('Excluir esta petição?')) return;
@@ -2006,7 +3080,10 @@ async function deleteSubmission(i) {
     }
   }
   appData.submissions.splice(i, 1);
+  if (selectedSubmissionIndex === i) selectedSubmissionIndex = null;
+  if (selectedSubmissionIndex !== null && selectedSubmissionIndex > i) selectedSubmissionIndex -= 1;
   renderSubmissions();
+  renderMemberPetitions();
 }
 function handlePhotos(input) {
   const grid = document.getElementById('photo-grid');
@@ -2046,24 +3123,101 @@ async function loadMembers() {
 }
 
 async function loadPetitions() {
-  if (!currentMember || currentMember.role !== 'admin') return;
+  if (!currentMember) return;
   try {
     const fb = await initFirebase();
     if (!fb) {
       renderSubmissions();
+      renderMemberPetitions();
       return;
     }
-    const snapshot = await fb.getDocs(fb.query(fb.collection(fb.db, 'petitions'), fb.orderBy('createdAt', 'desc')));
-    appData.submissions = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
-  } catch (_) {}
+    if (petitionsUnsubscribe) return;
+    const petitionsQuery = fb.query(fb.collection(fb.db, 'petitions'), fb.orderBy('createdAt', 'desc'));
+    petitionsUnsubscribe = fb.onSnapshot(petitionsQuery, snapshot => {
+      appData.submissions = snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
+      if (selectedSubmissionIndex !== null && !appData.submissions[selectedSubmissionIndex]) selectedSubmissionIndex = null;
+      renderSubmissions();
+      renderMemberPetitions();
+    }, err => {
+      const adminBody = document.getElementById('submissions-body');
+      if (adminBody) {
+        adminBody.innerHTML =
+          `<tr><td colspan="7" style="text-align:center;color:#e87070;padding:2rem;">${escapeHtml(err.message || 'Não foi possível acompanhar as petições em tempo real.')}</td></tr>`;
+      }
+      const memberList = document.getElementById('member-petitions-list');
+      if (memberList) memberList.innerHTML = `<div class="empty-state">${escapeHtml(err.message || 'Não foi possível carregar as petições.')}</div>`;
+    });
+    return;
+  } catch (err) {
+    const adminBody = document.getElementById('submissions-body');
+    if (adminBody) {
+      adminBody.innerHTML =
+        `<tr><td colspan="7" style="text-align:center;color:#e87070;padding:2rem;">${escapeHtml(err.message || 'Não foi possível carregar as petições.')}</td></tr>`;
+    }
+    const memberList = document.getElementById('member-petitions-list');
+    if (memberList) memberList.innerHTML = `<div class="empty-state">${escapeHtml(err.message || 'Não foi possível carregar as petições.')}</div>`;
+  }
   renderSubmissions();
+  renderMemberPetitions();
+}
+
+const memberAccessUrl = 'https://demolay-4957d.web.app/#inicio';
+
+function memberAccessEmailErrorMessage(err) {
+  const code = err?.code || '';
+  if (code.includes('unauthorized-continue-uri')) return 'o link do site precisa ser autorizado no Firebase Authentication.';
+  if (code.includes('invalid-email')) return 'o e-mail cadastrado parece inválido.';
+  if (code.includes('too-many-requests')) return 'o Firebase bloqueou temporariamente muitos envios.';
+  return err?.message || 'erro desconhecido no envio do e-mail.';
+}
+
+async function sendMemberAccessEmail(fb, email) {
+  try {
+    await fb.sendPasswordResetEmail(fb.auth, email, {
+      url: memberAccessUrl,
+      handleCodeInApp: false
+    });
+    return { sent: true };
+  } catch (err) {
+    console.warn('Não foi possível enviar o e-mail de acesso:', err);
+    return { sent: false, error: memberAccessEmailErrorMessage(err) };
+  }
+}
+
+function showMemberCreateSuccess(targetId, result) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  target.textContent = result?.email?.sent
+    ? 'DeMolay cadastrado. Enviamos um e-mail para ele definir a senha e acessar o site.'
+    : `DeMolay cadastrado, mas o e-mail automático não foi enviado: ${result?.email?.error || 'tente novamente mais tarde.'}`;
+  target.style.display = 'block';
+}
+
+async function createMemberRecord(payload) {
+  if (!currentMember || currentMember.role !== 'admin') {
+    throw new Error('Faça login com a sua conta administradora para cadastrar DeMolays.');
+  }
+  if (!payload.memberId || !payload.name || !payload.email || !payload.password) {
+    throw new Error('Preencha ID, nome, e-mail e senha.');
+  }
+  const fb = await requireFirebase();
+  const credential = await fb.createUserWithEmailAndPassword(fb.secondaryAuth, payload.email, payload.password);
+  await fb.setDoc(fb.doc(fb.db, 'members', credential.user.uid), {
+    memberId: payload.memberId,
+    name: payload.name,
+    email: payload.email,
+    role: payload.role || 'member',
+    status: payload.status || 'active',
+    uid: credential.user.uid,
+    createdAt: fb.serverTimestamp(),
+    updatedAt: fb.serverTimestamp()
+  });
+  const email = await sendMemberAccessEmail(fb, payload.email);
+  await fb.signOut(fb.secondaryAuth);
+  return { uid: credential.user.uid, email };
 }
 
 async function createMember() {
-  if (!currentMember || currentMember.role !== 'admin') {
-    alert('Faça login como administrador ativo para cadastrar membros.');
-    return;
-  }
   const payload = {
     memberId: document.getElementById('m-member-id').value.trim(),
     name: document.getElementById('m-name').value.trim(),
@@ -2072,26 +3226,29 @@ async function createMember() {
     role: document.getElementById('m-role').value,
     status: document.getElementById('m-status').value
   };
-  if (!payload.memberId || !payload.name || !payload.email || !payload.password) {
-    alert('Preencha ID, nome, e-mail e senha.');
-    return;
-  }
   try {
-    const fb = await requireFirebase();
-    const credential = await fb.createUserWithEmailAndPassword(fb.secondaryAuth, payload.email, payload.password);
-    await fb.setDoc(fb.doc(fb.db, 'members', credential.user.uid), {
-      memberId: payload.memberId,
-      name: payload.name,
-      email: payload.email,
-      role: payload.role,
-      status: payload.status,
-      uid: credential.user.uid,
-      createdAt: fb.serverTimestamp(),
-      updatedAt: fb.serverTimestamp()
-    });
-    await fb.signOut(fb.secondaryAuth);
+    const result = await createMemberRecord(payload);
     document.querySelectorAll('#tab-members input').forEach(el => el.value = '');
-    document.getElementById('member-create-success').style.display = 'block';
+    showMemberCreateSuccess('member-create-success', result);
+    await loadMembers();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+async function createMemberFromMemberArea() {
+  const payload = {
+    memberId: document.getElementById('owner-member-id').value.trim(),
+    name: document.getElementById('owner-member-name').value.trim(),
+    email: document.getElementById('owner-member-email').value.trim(),
+    password: document.getElementById('owner-member-password').value,
+    role: 'member',
+    status: 'active'
+  };
+  try {
+    const result = await createMemberRecord(payload);
+    document.querySelectorAll('#member-register-card input').forEach(el => el.value = '');
+    showMemberCreateSuccess('owner-member-create-success', result);
     await loadMembers();
   } catch (err) {
     alert(err.message);
@@ -2123,15 +3280,84 @@ function initTheme() {
   applyTheme(saved || preferred);
 }
 
+function updateChapterAge() {
+  const foundedAt = new Date(1985, 5, 15);
+  const today = new Date();
+  let age = today.getFullYear() - foundedAt.getFullYear();
+  const hadAnniversary = today.getMonth() > foundedAt.getMonth()
+    || (today.getMonth() === foundedAt.getMonth() && today.getDate() >= foundedAt.getDate());
+  if (!hadAnniversary) age -= 1;
+  document.querySelectorAll('[data-chapter-age]').forEach(el => {
+    el.textContent = String(age);
+  });
+}
+
+Object.assign(window, {
+  addAdvisory,
+  addEvent,
+  addOfficial,
+  addShowcaseEvent,
+  addSponsor,
+  adminTab,
+  approveSubmission,
+  closeAdmin,
+  closeMemberArea,
+  closeEventModal,
+  closeLogin,
+  closeLogoPreview,
+  closePasswordModal,
+  closeShowcaseModal,
+  closeSponsorModal,
+  createMember,
+  createMemberFromMemberArea,
+  deleteAdvisory,
+  deleteCategory,
+  deleteEvent,
+  deleteOfficial,
+  deleteShowcaseEvent,
+  deleteSponsor,
+  deleteSubmission,
+  doLogin,
+  editAdvisory,
+  editCategory,
+  editEvent,
+  editOfficial,
+  editShowcaseEvent,
+  editSponsor,
+  handlePhotos,
+  logoutMember,
+  openAdmin,
+  openImagePreview,
+  openLogin,
+  openLogoPreview,
+  openPasswordModal,
+  openSiteTab,
+  selectCategory,
+  submitForm,
+  submitEventModal,
+  submitPasswordModal,
+  submitShowcaseModal,
+  submitSponsorModal,
+  toggleMenu,
+  toggleTheme,
+  updateLogo,
+  viewSubmission
+});
+
 // Enter to login
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && document.getElementById('logo-preview').classList.contains('open')) closeLogoPreview();
+  if (e.key === 'Escape' && document.getElementById('event-modal').classList.contains('open')) closeEventModal();
+  if (e.key === 'Escape' && document.getElementById('password-modal').classList.contains('open')) closePasswordModal();
+  if (e.key === 'Escape' && document.getElementById('showcase-modal').classList.contains('open')) closeShowcaseModal();
+  if (e.key === 'Escape' && document.getElementById('sponsor-modal').classList.contains('open')) closeSponsorModal();
   if (e.key === 'Enter' && document.getElementById('login-modal').classList.contains('open')) doLogin();
 });
 
 // Init
 initTheme();
-renderEvents(); renderOfficials(); renderAdvisory(); renderSponsors();
+updateChapterAge();
+renderEvents(); renderShowcaseEvents(); renderOfficials(); renderAdvisory(); renderSponsors();
 loadManagedSiteData();
 initSiteTabs();
 initSession();

@@ -9,6 +9,9 @@
       ".firebaserc",
       "firestore.rules",
       "auth-test.json",
+      "public-site/**",
+      "tools/**",
+      "tunnel-logs/**",
       "**/.*",
       "**/node_modules/**"
     ]
